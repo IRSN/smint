@@ -1,0 +1,133 @@
+2015-06-04  yves  <deville.yves@alpestat.com>
+
+	* Renamed the package as 'smint' instead of 'mint' because the
+	later is no longer available for use on the CRAN.
+
+2015-05-19  yves  <deville.yves@alpestat.com>
+
+	* Removed the functions 'GridInt' and GridIntCB' from the exported
+	objects in NAMESPACE. These functions still exist (unchanged) in
+	the package, but are now to be used through 'interp_Grid' only.
+
+	* Changed the 'interp_Grid' function and its documentation. 
+
+	* Changed the 'mintGuide' document which is now used via 'knitr' and
+	no longer via 'Sweave'.
+
+2015-05-13  yves  <deville.yves@alpestat.com>
+
+	* Renamed the format 'nxEsp' of 'randGrid' as 'nxE'. 
+
+	* Small changes in doc: \url changed in \href to avoid long
+	strings that can not be hyphenised in the pdf manual. Added
+	missing methods the doc of the "Grid" class.
+
+	* Re-compiled the documents 'mintGuide.pdf' 'CompDet.pdf' in
+	inst/doc with the due change for the renamings. These documents
+	are now compatible with the current version of 'mint'.
+
+	* Renamed 'cheschinoInt' into 'interp_ceschino' and 'roundLevels'
+	into 'round_levels'.
+	
+2015-05-12  yves  <deville.yves@alpestat.com>
+
+	* Changed some text for the help files.
+
+	* Added a preliminary version of 'interp_Grid' (with no examples
+	yet).
+
+	* Changed the DESCRIPTION file to conform to CRAN: Title style for
+	the 'Title', sentences in 'Description'. Added the authors of
+	Fortran codes.
+
+	* Renamed the "GridData" class into "Grid", 'rGrid' into
+	'randGrid', *CB into cardBasis_*, 'GD*' into '*_GD'. Subsequent
+	changes in the doc with renaming of the .Rd files.
+		
+
+2015-02-27  yves  <deville.yves@alpestat.com>
+
+	* Added NAMESPACE
+
+	* Removed mutiple dispatch for 'checkX' and 'closest'.
+	
+2015-02-26  yves  <deville.yves@alpestat.com>
+
+	* Added GD* functions for 'GridData' management.
+
+	* Removed the allocations of arrays in 'splinterp.f' and
+	'alterp.f'.
+	
+
+2015-02-20  yves  <deville.yves@alpestat.com>
+
+	* Implemented the interfaces to 'QSHEP2D' and 'QSHEP3D'.
+
+	* GridData management: changed some names to GD*, added 
+	a function to find boundary points, range, ...
+	
+	* Corrected some bugs or errors in the documentation.
+	
+
+2015-02-11  yves  <deville.yves@alpestat.com>
+
+	* BUG FIX. 'rMax' was passed as integer to the subroutine
+	'sheppint', with no consequence on input but caussin a meaningless
+	value to be returned.
+
+	
+2014-11-14 Yves
+
+	* Added the C implementation of 'gridInt'. This is done by 
+	using the .Call interface.
+	
+	* Added the 'gridIntCB' function and its doc, along with
+	some Cardinal Basis constructor: 'lagrangeCB', 'ceschinoCB' and
+	'natSplineCB'.
+ 
+	* Completed the document 'Computing Details'.
+	
+	
+2014-10-12 Yves
+	
+	* Added a 'closest' method dispatching on two arguments 'XNew'
+	and 'X'.
+
+	* Changed the order of the formal in 'checkX' and turned this 
+	function into a S4-generic to dispatch on arguments.
+
+	* Fixed a bug in the nOut > 1 case in GridInt.
+		 
+	
+2014-04-08  Yves
+
+	* Removed unneccessary duplications of big arrays in the code of
+	'gridInt'. 
+
+	* Added (with changed name) a formal to specify the interpolation
+	order in 'gridInt'.
+
+2014-04-02  Yves 
+
+	* Improved the dimnames for the 'index' slot in GridData objects.
+
+	* Added tests functions and their documnetation: 'branin' (copied
+	from DiceKriging) 'ShepFun1', ... 'ShepFun5'.
+
+	* Removed the 'setGeneric' for existing builin which created some
+	problems.
+
+	* Fixed some errors in 'setGeneric' (bad names).
+	
+
+2014-03-29  Yves
+ 
+	* 'gridInt' function for grid interpolation using an arbitrary
+	interpolation method.
+ 
+	* Added a S4 class "GridData" and some methods fot it. This class
+	and its methods can be used to produce test data with pretty few
+	lines of code. See examples in the documentation of the methods.
+	
+
+	

@@ -1,0 +1,41 @@
+useDynLib(smint)
+importFrom(Matrix, invPerm)
+importFrom(lattice, wireframe)
+import(methods)
+importFrom("graphics", plot)
+
+exportClasses(Grid)
+
+exportMethods(aperm,
+              as.matrix,
+              as.data.frame,
+              sampleIn,
+              checkX,
+              closest,
+              dim, dimnames, "dimnames<-",
+              levels, nlevels,
+              length,
+              plot, show, 
+              coerce)
+
+export(apply_Grid,
+       array_Grid, boundary_Grid, drop_Grid,
+       range_Grid, scale_Grid,
+       subset_Grid,
+       Grid, randGrid,
+       as.Grid,
+       interp_ceschino,
+       cardinalBasis_ceschino,
+       cardinalBasis_natSpline,
+       cardinalBasis_lagrange,
+       ## gridInt, gridIntCB, ## no longer exported
+       interp_Grid,
+       qsheppInt, qsheppInt2d, qsheppInt3d,
+       branin, ShepFun1, ShepFun2, ShepFun3, ShepFun4, ShepFun5, ShepFuns,
+       round_levels)
+
+S3method(as.Grid, default)
+S3method(as.Grid, data.frame)
+S3method(as.Grid, list)
+
+## exportPattern("^[[:alpha:]]+")

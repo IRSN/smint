@@ -1,0 +1,12 @@
+* [For CRAN release] Terminate code / doc for interp_Grid, including
+  examples. Then remove the 'GrindInt' and 'GridIntCB' from the
+  exported functions and make sure that their doc is no-longer
+  visible.
+
+* Define a S4 class for function evaluation on a grid? Could be useful
+  for 'plot' and 'contour' methods (give only one argument instead of
+  3).
+
+* [DONE] Write benchmarks with the test functions.
+
+

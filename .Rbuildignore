@@ -1,0 +1,8 @@
+doc/smintGuide.Rnw
+doc/smintGuide.tex
+doc/Rplots.pdf
+doc/images
+doc/Rgraphics
+
+^.*\.Rproj$
+^\.Rproj\.user$

@@ -1,0 +1,908 @@
+\documentclass[11pt,a4paper]{report}
+%
+%%=============================================================================
+%% Le choix des packages differe selon que l'on souhaite generer du postscript
+%% ou du pdf (les images doivent etre preentes!!!)
+%%=============================================================================
+%%
+\usepackage{makeidx}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{fancybox}
+\usepackage{verbatim}
+\usepackage[english]{babel}
+\usepackage{fancyheadings} 
+\usepackage{multirow}
+\usepackage[pdftex]{hyperref}
+%
+\usepackage{pgf,pgfarrows}
+\usepackage{tikz}
+%
+\usepackage{fullpage}
+%
+\usepackage[utf8]{inputenc}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\renewcommand{\theHalgorithm}{\thechapter.\arabic{algorithm}} 
+\usepackage{setspace}
+
+\usepackage[nodayofweek]{datetime}
+%%\newdateformat{mydate}{\THEYEAR-\twodigit{\THEMONTH}{}-\twodigit{\THEDAY}{}}
+\newdateformat{mydate}{\THEYEAR-\twodigit{\THEMONTH}{}-\twodigit{\THEDAY}{}}
+
+%% this command is used to solve a bug with IEEEtran document class 
+%
+%% bibliography
+\if@shortnames
+  \usepackage[authoryear,round]{natbib}
+\else
+  \usepackage[authoryear,round,longnamesfirst]{natbib}
+\fi
+\bibpunct{(}{)}{;}{a}{}{,}
+\bibliographystyle{jss}
+%%-----------------------------------------------
+\pdfinfo{
+  /Title (Introduction to smint)
+  /Subject ()
+  /Author  (Yves Deville and Yann Richet)
+  /Keywords ()
+}
+     
+%%
+%%=============================================================================
+%% Couleurs
+%%=============================================================================
+%
+\definecolor{MonVert}{rgb}{0.398,0.801,0.000} 
+\definecolor{MonRouge}{rgb}{0.600,0.060,0.360} 
+\definecolor{MonBleu}{rgb}{0.000,0.602,0.801} 
+\definecolor{SteelBlue2}{rgb}{0.359375,0.671875,0.9296875}
+\definecolor{orange}{rgb}{1.0,0.6470,0.0}
+\definecolor{SteelBlue4}{rgb}{0.212, 0.392, 0.545}
+\definecolor{MonJaune}{rgb}{0.996,0.996,0.875}
+\definecolor{orange1}{rgb}{0.996,0.645,0}
+\definecolor{PaleVioletRed}{rgb}{0.855,0.438,0.574}
+
+%%=============================================================================
+%% Commandes pour le formatage
+%%=============================================================================
+%
+\newcommand{\m}{\mathbf}   
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\pkg}[1]{\textbf{#1}}
+\newcommand{\XXX}{{\color{red}\Large\sf A completer}} 
+\newcommand{\Gr}[1]{#1^{\star}}
+%% Statistique... General
+%%--------------------------------------
+\newcommand{\tr}[1]{#1^{\top}}
+\newcommand{\fsim}{y^{\textrm{sim}}}
+\newcommand{\New}[1]{#1^{\mathrm{new}}}
+\newcommand{\Esp}{\mathbb{E}}
+\newcommand{\Cov}{\textrm{Cov}}
+\newcommand{\Corr}{\textrm{Corr}}
+\newcommand{\Var}{\textrm{Var}}
+\newcommand{\Cond}[2]{#1 \left\vert\,#2\right.}
+\newcommand{\bCond}[2]{\left[#1 \left\vert\,#2\right.\right]}
+\newcommand{\pCond}[2]{\left(#1 \left\vert\,#2\right.\right)}
+\newcommand{\Binom}[2]{\left(\begin{array}{c}\scriptsize{#1}\\#2\end{array}\right)}
+\newcommand{\Cellp}[2]{
+  \setlength{\fboxsep}{0.4em}\setlength{\fboxrule}{0pt}%
+  \framebox{\parbox{#1}{\color{black}{#2}}}  
+}
+%%=========================================================  
+\definecolor{InputColor}{rgb}{0.300,0.060,0.660}
+\definecolor{OutputColor}{rgb}{0.133,0.543,0.133}
+\definecolor{Gray}{rgb}{0.5,0.5,0.5}
+%%========================================================
+
+
+%%=============================================================================
+%% Environnements
+%%=============================================================================
+
+
+
+%=============================================================================
+% Titre
+%=============================================================================
+
+
+\date{}
+ 
+\makeindex                                                                              
+%
+\begin{document}
+
+\theoremstyle{remark}
+\newtheorem{rk}{Remark}
+
+
+%% preliminary chunks (not echoed) 
+<<include=FALSE, echo=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.path='Rgraphics/fig-', dev='pdf', tidy=FALSE)
+@
+
+\setkeys{Gin}{width=7cm}
+<<options, echo = FALSE, results = "hide">>=
+options(prompt = "R> ", continue = "   ", width = 80)
+library(smint)
+smint.Version <- packageVersion("smint")
+@
+
+%========================== Page de titre ========================================
+\begin{titlepage}
+\rule{0pt}{10pt}
+\vspace{4cm}
+\begin{center}
+\noindent \color{MonBleu}{\rule[3mm]{\linewidth}{2pt}} 
+\parbox{\linewidth}{\setlength{\baselineskip}{24pt}%
+\centering
+\textbf{
+  \color{black}{\huge 
+    The smint package}\\
+    {\Large user's guide}}}\\
+\color{MonBleu}{\rule[-3mm]{\linewidth}{2pt}}
+\end{center}
+\vspace{1.3cm}
+
+\begin{center}
+   \mydate
+   \today\\
+   \textbf{smint} version \Sexpr{smint.Version}
+\end{center}
+\vspace{1.5cm}
+
+\begin{center}
+   \Large 
+   Yves Deville and Yann Richet
+\end{center}
+
+\vspace{4.0cm}
+\begin{minipage}{\linewidth}
+  Yves Deville Statistical consultant Alpestat {\color{MonBleu}deville.yves{@}alpestat.com}
+  \smallskip\par\noindent
+  Yann Richet Technical Advisor IRSN {\color{MonBleu}yann.richet{@}irsn.fr}
+\end{minipage}
+
+\end{titlepage}
+%==============================================================================
+
+\tableofcontents{}
+\setcounter{tocdepth}{3}  
+
+\chapter*{The smint package: outlook}
+%%========================================
+
+\section*{Goals}
+%%---------------------
+The \pkg{smint} package has been initiated and financed by the french
+institute IRSN\footnote{Institut de Radioprotection et de Sûreté
+  Nucléaire}.  The main goal is to provide \textit{fast} methods of
+interpolation for typical dimensions between $3$ and $7$, as
+required for instance in the study of nuclear cross-sections. 
+The two classical contexts of interpolation, namely \textit{gridded
+  data} and \textit{scattered data} are of interest.
+
+
+We assume to be given $n$ distinct vectors $\m{x}_i$ called
+\textit{nodes} in the $d$-dimensional space $\mathbb{R}^d$ and $n$
+real values $f_i$. The goal is to find a function $f$ defined on a
+domain containing the nodes and such that the $n$ interpolation
+conditions $f(\m{x}_i) = f_i$ hold for $i=1$, $2$, $\dots$, $n$. The
+function must be smooth, and at least continuous. It will be obtained
+in a form allowing the evaluation of $f(\New{\m{x}}_j)$ for $\New{n}$
+arbitrary new points in $\mathbb{R}^d$.
+
+A boldface notation will be used for vectors and matrices as in
+$\m{x}_i = [x_{i1},\,x_{i2}, \,\dots,\,x_{id}]^\top$ for the $i$-th
+node. The notations $x_1$, $x_2$, $\dots$, $x_d$ will be used to
+denote the coordinates or variables matching the $d$ dimensions. In
+the classical contexts where $d \leqslant 3$, the dimensions can for
+the sake of clarity be named $x$, $y$, $z$ in place of $x_1$, $x_2$
+and $x_3$ and the function values can be denoted by $f_i$. In the
+general context, the prescribed function values at the nodes will
+sometimes be denoted as $y_i$ rather than $f_i$.
+
+
+\section*{Scattered data}
+%%---------------------
+For the \textit{scattered data} context, the data to be interpolated
+are likely to be given as a data frame or matrix \verb@X@ with a
+numeric vector of response \verb@f@ or \verb@y@.
+
+
+\section*{Grid data}
+%%---------------------
+A $d$-dimensional grid is a finite set in the $d$-dimensional space
+which is the tensor product of $d$ finite sets, one for each
+dimension. The $n_j$ elements for the dimension~$j$ may be called
+\textit{levels} of the variable $x_j$ and can be assumed to be given
+in increasing order
+$$
+   x_{j,1}^\star < x_{j,2}^\star < \dots < x_{j,n_j}^\star \qquad j= 1,\,2, \dots,\, d.
+$$
+The total number of nodes is $n = n_1
+\times n_2 \times \dots \times n_d$.
+
+The levels are conveniently stored in R as a list of $d$~numeric
+vectors.  Often the grid range will be the hyper-cube of interest, so
+nodes having one of their levels equal to the minimum or maximal level
+are boundary points.
+
+When working with grid data, a particular ordering of the nodes must
+be chosen so that each of the $n$ elements in the response vector can
+be related to the corresponding node $\m{x}_i$.
+
+\section*{Multi-response}
+%%-------------------------------
+In some cases it will be needed to interpolate several functions
+rather than one, still using the same set of nodes $\m{x}_i$ and the
+same set of new evaluation points~$\New{x}_j$. We call this context
+\textit{multi-response} interpolation, since multivariate
+interpolation is ambiguous.
+
+If $m$ response functions are of interest, the $n$ prescribed function
+values can be seen as forming a $n \times m$ matrix $\m{F}$.
+
+
+
+\chapter{The \texttt{Grid} class}
+%%===================================================
+
+\section{Motivation: grids as data frames}
+%%-----------------------
+\index{expand.grid@{\texttt{expand.grid}}}
+The popular \verb@expand.grid@ function from the \pkg{base} package provides a 
+representation of a grid as a data frame object.
+
+<<>>=
+df <- expand.grid(x = c(0.0, 0.2, 1.0), y = c(1.0, 2.5, 3.0), z = c(0.2, 0.4))
+nrow(df)
+head(df)
+class(df)
+@ 
+
+\noindent
+Note the rule: \textit{first index varies faster}, which will also be retained
+in \pkg{smint}. We could as well have used a single \textit{list} formal argument
+
+<<>>=
+df2 <- expand.grid(list("x" = c(0.0, 0.2, 1.0), "y" = c(1.0, 2.5, 3.0),
+                        "z" = c(0.2, 0.4)))
+identical(df, df2)
+@ 
+
+\noindent
+This second form is convenient to deal with grids in an arbitrary dimension~$d$.
+
+The grid described by \verb@df@ could be shown on a three
+dimensional plot using the package \pkg{scatterplot3d} or \pkg{rgl},
+see left panel of figure~\ref{TwoPlots}. But an useful diagnostic is
+straightforwardly given by the \verb@plot@ method, which provides the
+\textit{pairs plot} shown on the right of figure~\ref{TwoPlots}.
+
+<<label="plotdf", include=FALSE>>=
+plot(df, pch = 16, col = "ForestGreen", cex = 1.2)
+@ 
+
+\noindent
+Each point shown in a pair panel corresponds to \textit{several} grid
+points having the same two-dimensional projection. This problem gets
+more crucial with grids in higher dimension, since many points can
+then be collapsed into one. Using semi-transparent (translucent)
+colors can be of some help, see later.
+
+\begin{figure}
+  \centering
+  \begin{tabular}{c c} 
+    \includegraphics[width=5cm]{./images/grid3d.png} &
+    \includegraphics[width=10cm]{./Rgraphics/fig-plotdf-1.pdf}
+  \end{tabular}
+  \caption{\label{TwoPlots} left: three-dimensional representation of the grid using
+    \pkg{rgl}. Right: using the \texttt{plot} method for data frames.}
+\end{figure}
+
+Recall that even when their columns are numeric, data frames are very
+different from matrices. They are \textit{frames} in which columns can
+be used in expression, like objects in an environment. This is usually
+achieved by using the methods \verb@with@, \verb@within@
+
+<<>>=
+f <- with(df, x^3 + 2 * y + z^2) 
+@
+
+\noindent
+Yet a function can easily be applied to each row of the data frame
+in a matrix fashion. For instance $f(x, \, y, \, z) := x^3 + 2y + z^2$
+
+<<>>=
+my3dFun <- function(x) x[1]^3 + 2 * x[2] + x[3]^2
+f2 <- apply(df, MARGIN = 1, FUN = my3dFun)
+max(abs(f - f2))
+@
+
+\label{my3dFun}%
+\noindent
+Note that the order of the columns is essential here, while it was
+immaterial in the computation of \verb@f2@ above.
+Since each grid dimension is mapped to a column, it is quite easy
+to have a permutation of the dimensions.
+
+<<>>=
+dfP <- df[ , c(2, 3, 1)]
+head(dfP)
+@ 
+
+\noindent
+The order of the rows also matters.  In some contexts, the nodes have
+a particular ordering, e.g. because they are associated to successive
+experiments. Then it is important to keep a numbering of the nodes
+attached with the grid, as is naturally done in the data frame
+representation.
+
+% A \verb@Grid@ object 
+% can be thought of as a traveller salesman's
+% path visiting each node exactly once.
+
+The data frame representation is convenient for many common operations
+involving grids. However some apparently simple operations can be
+either tricky or inefficient.  For instance, retrieving the grid
+levels from data frame representation is quite tedious, since it
+requires something like a \verb@tapply@. Although the list of the
+levels was provided in the creation of the grid, this information is
+no longer readily accessible from the object, and it would be
+convenient to have it attached to the object.  As another example,
+finding the boundary points of the grid from the data frame
+representation is no more straightforward. Using a data frame with
+attributes could help in many problems. However, it should then be
+checked that the order of the columns remains the same in the data
+frame and in the list, and the data frame contains as assumed a tensor
+product of finite sets.
+
+In the \pkg{smint} package, it was decided to define a S4 class for the
+grid under the name \verb@Grid@, in the aim that standard methods
+give the frequently needed information. As in the data frame
+representation, the nodes will be considered as ordered so a
+\verb@Grid@ object can be thought of as a \textit{traveller salesman's
+path} visiting each node of the grid exactly once.
+
+
+\section{Creating a \texttt{Grid} object}
+%%-----------------------
+A \verb@Grid@ object can be created using the quite versatile
+\verb@Grid@ creator, similar to the list version of \verb@expand.grid@
+
+<<>>=
+myGrid1 <- Grid(level = list("x" = c(0.0, 0.2, 1.0), "y" = c(1.0, 2.5, 3.0),
+                             "z" = c(0.2, 0.4)))
+myGrid1 
+@ 
+
+\noindent
+An object named \verb@myGrid@ and class \verb@"Grid"@ is created; as
+is usual with S4 classes, by typing the name of an object one invokes
+the \verb@show@ method\footnote{This is similar to the invocation of
+  \texttt{print} for S3 classes/objects.}  A number of methods can be
+invoked
+
+<<>>=
+length(myGrid1)
+nlevels(myGrid1)
+levels(myGrid1)
+dimnames(myGrid1)
+@ 
+
+\noindent
+A more concise call to the creator can sometimes be used. By default,
+the standard hypercube $[0,\,1]^d$ and regularly spaced coordinates
+along the axes will be used.
+
+<<>>=
+myGrid2 <- Grid(nlevels = c(3, 3, 2))
+myGrid2
+myGrid2 <- Grid(nlevels = c("a" = 3, "b" = 3, "c" = 2))
+myGrid2
+dimnames(myGrid2) <- c("A", "B", "C")
+myGrid2
+@ 
+
+\noindent
+Note that the default dimnanes are \verb@"X1"@, \verb@"X2"@ and so on,
+but can be specified by using a named vector for the number of
+levels. They can also be changed by using the replacement method
+\verb@dimnames<-@ as illustrated before.
+
+Another possibility to create a \verb@Grid@ object
+is to use the \verb@randGrid@ which generates 
+a random \verb@Grid@ object. This can be of some help to test 
+the results of interpolation methods.
+
+<<>>=
+set.seed(123)
+rGrid <- randGrid()
+rGrid
+levels(rGrid)
+@ 
+
+\noindent
+The user can control some features of the object by using the optional
+arguments of \verb@randGrid@ such as \verb@dim@ or
+\verb@nlevels@. Note that a \verb@Grid@ object with moderate
+dimension, e.g. $6$ or $7$ might then have a considerable number of
+nodes.
+
+\subsection*{Back to data frames}
+%%---------------------------
+One of the most common operation is the transformation of the object into a data frame
+
+<<>>=
+df <- as.data.frame(myGrid1)
+head(df)
+@ 
+
+\noindent
+Conversely, a \verb@Grid@ in arbitrary dimension can be created by
+coercing a data frame or a matrix with suitable content using
+\verb@as.Grid@. Obviously, not every data frame can be used, and an
+error will occur when the data frame is not suitable. The two
+coercions are nearly reversible.
+
+<<>>=
+identical(as.Grid(as.data.frame(myGrid1)), myGrid1)
+@ 
+
+\noindent
+However, we do not recommend to compare \verb@Grid@ objects with
+\verb@identical@, since the result can misleadingly be \verb@FALSE@
+only because of the rounding of the levels.
+
+Note that \verb@as.Grid@ will be quite slow for a large grid object.
+As a major difference with the data frame representation, a
+\verb@GriData@ stores all the $n$ possible combinations of the levels
+as vectors of length~$d$ with \textit{integer} values rather than
+double. So for a large grid, the \verb@Grid@ representation needs only
+about $1/8$ of the space required by the data frame representation.
+
+\subsection*{Plot method}
+%%---------------------------
+The trained R user might have guessed at this point that the
+\verb@plot@ method for the class \verb@Grid@ will produce exactly the
+plot that would have resulted from using the \verb@plot@ method after
+a coercion to a data frame using \verb@as.data.frame@. This is true as
+far as only one formal is used. When the grid dimension is $>2$ we
+noticed that the pairs representation can be very misleading since
+several points in the $d$-dimensional space collapse into the same
+projection in a particular pair plot. A simple way to avoid this is to
+jitterise the points. A \verb@jitter@ argument was added to the
+\verb@as.data.frame@ coercion method and to the \verb@plot@
+method. Combined with semi-transparent colors, a improved
+representation results
+
+<<label="plotGrid", include=FALSE>>=
+myCol <- DiceView:::translude("ForestGreen", alpha = 0.6)
+plot(myGrid1, jitter = TRUE, pch = 16, col = myCol, cex = 1.2)
+@ 
+
+\noindent
+See figure~\ref{plotdfGrid}.  The points can be given different colors,
+size, ... by using vectors.  Remind then that the order of points is
+then essential.
+
+\begin{figure}
+  \begin{tabular}{c c} 
+    \includegraphics[width=\linewidth]{./Rgraphics/fig-plotGrid-1.pdf}
+  \end{tabular}
+  \caption{\label{plotdfGrid} Pairs plot produced by the \texttt{plot}
+    method of the \texttt{Grid} class with the formal 
+    argument \texttt{jitter} set to \texttt{TRUE}. 
+}
+\end{figure}
+
+
+\section{Operations with  \texttt{Grid} objects}
+%%-----------------------
+\subsection*{Flat grids}
+%%-----------------------
+\index{flat grid} 
+A grid in which one dimension has only one level
+will be said to be flat. This can be compared to a flat array, e.g. a
+matrix with one row or one column. By default, R drops the unnecessary
+dimensions of flat arrays when subsetting, and the user can also do
+this on purpose by using the \verb@drop@ function. A similar operation
+is possible for \verb@Grid@ objects by using the \verb@drop_Grid@
+function which drops the dimensions of flat grids
+
+<<>>=
+flatGrid <- Grid(nlevels = c(2, 1, 3))
+flatGrid
+drop_Grid(flatGrid) 
+@ 
+
+\noindent
+The \verb@drop_Grid@ function can be
+used from the matrix or data frame representation; however it will
+then make use of the coercion method \verb@as.Grid@, hence of \verb@tapply@.
+
+\subsection*{Applying a function}
+%%-----------------------
+The \verb@apply_Grid@ function can be used with its first formal \verb@object@
+of class \verb@"Grid"@. Using the function \verb@my3dFun@ 
+defined in section~\ref{my3dFun} page~\pageref{my3dFun}
+
+<<>>=
+fGrid <- apply_Grid(myGrid1, fun = my3dFun)
+max(abs(fGrid - f))
+@ 
+
+\noindent
+So we get the same result as with \verb@apply@.
+
+\subsection*{Generalised transposition}
+%%-----------------------
+\index{generalised transposition}
+\index{aperm@{\texttt{aperm}}}
+A useful operation is the \textit{generalised transpose},
+corresponding to the \verb@aperm@ method in the \pkg{base}
+package. This is equivalent to a permutation of the columns in the
+data frame or matrix representation, and the \textit{order of nodes}
+remains unchanged. So, if a function or response has been computed on
+the nodes and is stored as a response vector~\verb@f@, this will
+remain unchanged when \verb@aperm@ is used on the \verb@Grid@
+object \verb@X@ with a subsequent modification of the function. 
+
+<<>>=
+myGrid1p <- aperm(myGrid1, perm = c(3, 1, 2))
+myGrid1p
+my3dFunp <- function(x) x[2]^3 + 2 * x[3] + x[1]^2
+fGridp <- apply_Grid(myGrid1p, fun = my3dFunp)
+max(abs(fGridp - f))
+@ 
+
+\noindent
+In the definition of the function, the elements of the formal \verb@x@
+must correspond to $z$, $x$, and $y$ in that order.  It is possible to
+make the function independent of the order of the dimensions by using
+a named vector as formal.
+
+<<>>=
+my3dFuni <- function(x) x["x"]^3 + 2 * x["y"] + x["z"]^2
+fGridi <- apply_Grid(myGrid1p, fun = my3dFuni)
+max(abs(fGridi - f))
+fGridi0 <- apply_Grid(myGrid1, fun = my3dFuni)
+max(abs(fGridi0 - f))
+@ 
+
+\noindent
+This works because \verb@apply_Grid@ relies on the \verb@apply@
+function for matrices, in which the first function formal can be
+named.  Using a named vector as formal should be preferred when
+possible.
+
+\medskip\par\noindent {\bf\textit{Remark}}. The \verb@with@ method is
+not yet implemented for a \verb@data@ formal with class
+\verb@"Grid"@. It can easily be used through a coercion to data 
+frame.
+
+
+\subsection*{Range and scale}
+%%-----------------------
+The \verb@range_Grid@ and \verb@scale_Grid@ functions can be used to
+get or set the range of a \verb@Grid@ object
+
+<<>>=
+range_Grid(myGrid1)
+myGrid1s <- scale_Grid(myGrid1)
+range_Grid(myGrid1s)
+@ 
+
+\noindent
+The scaling transformation can be controlled with the \verb@fromRange@
+and \verb@toRange@ formal arguments.
+
+\subsection*{Boundary points}
+%%-----------------------
+The \verb@boundary_Grid@ function identifies the points located on the
+boundary, assuming that the smallest and largest levels are boundary
+levels for each of the $d$ dimensions. When the number of levels is
+$\leqslant 2$ for one dimension or more, all points are boundary
+points.
+
+
+<<label="plotGridB", include=FALSE>>=
+myGrid3 <- Grid(nlevels = c("X" = 5, "Y" = 7, "Z" = 6))
+bd3 <- boundary_Grid(myGrid3, type = "index")
+
+myCols <- DiceView:::translude(c("ForestGreen", "orangered"), alpha = 0.8)
+cols3 <- rep(myCols[1], length(myGrid3))
+cols3[bd3] <- myCols[2]
+plot(myGrid3, jitter = TRUE, col = cols3, pch = 16, main = "Boundary points")
+@ 
+
+\noindent
+See figure~\ref{plotdfGridB}. The number of interior (non-boundary) 
+points is 
+$ \prod_{i=1}^d \left[ n_i -2 \right]$, i.e.  $3 \times 5 \times 4 =60$ for this example.
+
+\begin{figure}
+  \begin{tabular}{c c} 
+    \includegraphics[width=\linewidth]{./Rgraphics/fig-plotGridB-1.pdf}
+  \end{tabular}
+  \caption{\label{plotdfGridB} Grid data with
+    $n_x=\Sexpr{nlevels(myGrid3)[1]}$, $n_y=\Sexpr{nlevels(myGrid3)[2]}$
+    and $n_z= \Sexpr{nlevels(myGrid3)[3]}$ levels.  Boundary points are
+    plotted in orange and non-boundary points are in green.  Among the
+    \Sexpr{length(myGrid3)} nodes, \Sexpr{length(bd3)} are on the
+    boundary.  }
+\end{figure}
+
+\medskip\par\noindent {\bf\textit{Remark}}. When choosing the
+same number of points by dimension, say~$n_1$, the proportion of interior
+(non-boundary) points is given by $[1 - 2 /n_1]^d$ and turns out to be
+small for dimensions $d \geqslant 5$. This is one of the effects of
+the \textit{curse of dimensionality}: when the dimension $d$ is large, most
+grid points are located on the boundary of the hyper-rectangle.
+
+
+\subsection*{Sampling}
+%%-----------------------
+\index{sampling from/in a \texttt{Grid} object} 
+A common need when working with a grid is to draw random points,
+either at grid points or within the hyper-rectangle of interest.  The
+\verb@sampleIn@ method was written for that. Using our \verb@myGrid3@
+object defined earlier with \Sexpr{length(myGrid3)} nodes.
+
+<<sampleIn>>=
+X3s <- sampleIn(myGrid3, size = 100)
+head(X3s)
+X3ss <- sampleIn(myGrid3, size = 100, atSample = TRUE)
+head(X3ss)
+@
+
+\noindent
+The result is a matrix that can be coerced to a data frame when
+needed.
+
+\subsection*{Reshaping response(s) to an array}
+%%--------------------------------------------------------
+When $d=2$, a common practice is to provide a response as a matrix
+with row $i$ corresponding to the $i$-th value of the first dimension
+$x_1$ (or $x$) and the column $j$ matching the $j$-th value of the
+second dimension $x_2$ (or $y$).  This form is often require to
+produce contour plot or a perspective plot (not shown here).  The
+\verb@array_Grid@ function can be used for that.
+
+<<label="contour", fig.keep="none">>=
+plotGrid <- Grid(nlevels = c(10, 10))
+F <- apply_Grid(plotGrid, branin)
+aF <- array_Grid(X = plotGrid, Y = F)
+round(aF)
+contour(aF, nlevels = 20)
+@
+
+\noindent
+This rule obviously generalises to a larger dimension~$d$: a response
+can be reshaped into a $d$-dimensional array with dimension $[n_1,
+\,n_2, \,\dots,\, n_d]$. Moreover, when $m$ responses are available we
+can use a $d+1$-dimensional array with the response index as the slice
+index in the $d+1$ dimension.
+
+\subsection*{Subgrid}
+%%------------------------------------
+The \verb@subset_Grid@ function allows the selection of a sub-grid by
+selecting the nodes using a clause for \textit{one} dimension, using
+the \verb@subset@ argument.
+
+<<>>=
+subset_Grid(myGrid1, subset = y > 2)
+@ 
+
+\noindent
+We get here the indices of the nodes in the subset, which would be
+convenient e.g. to find the corresponding responses in a
+vector. Alternatively, one can return the result as a \verb@Grid@
+
+<<>>=
+subset_Grid(myGrid1, subset = y > 2, type = "Grid")
+@ 
+
+\noindent
+If the sub-grid turns out to be flat because only one node is selected,
+the dimension used in the selection will be dropped by default. This
+would here have happened with \verb@subset = y > 3@.
+
+\subsection*{Why uppercase X?}
+%%-----------------------
+The \texttt{*\_Grid} functions (see table~\ref{Gridfuns}) are
+``pseudo-methods'', and are intended to work for \verb@Grid@ objects
+as well as for their data frame or matrix representation, and they
+have their first argument named \verb@X@ to remind of that.
+
+\section{Summary}
+%%====================
+
+\begin{itemize}
+
+\item The \pkg{smint} package provides a \verb@Grid@ S4 class with some
+  methods and dedicated functions.
+
+\item A \verb@Grid@ object is efficiently coerced into a data frame
+  when needed but it also contains information about the grid
+  characteristics: number of levels, levels, ...
+
+\item A \verb@Grid@ object contains a numbering of the grid points
+  which is used to match the grid points and the responses. Several
+  functions are provided to apply a (test) function on a grid, reshape
+  responses to an array, remove unneeded dimensions and more.
+
+\end{itemize}
+
+
+\begin{table}
+  \small \centering
+  \begin{tabular}{| l | c | l |}
+    \hline 
+    \multicolumn{1}{|c|}{\textit{Method}\rule[-0.7em]{0pt}{2.0em}} & 
+    \multicolumn{1}{c|}{\textit{df?}} & 
+    \multicolumn{1}{c|}{\textit{Goal}} 
+    \\ \hline 
+    %% ----------------------------------------------------------------------------
+    \Cellp{6.4cm}{
+      \texttt{aperm(x, perm)} 
+    } &  
+    & 
+    \Cellp{6.6cm}{
+      Generalised transposition.
+    }
+    \\ \hline 
+     %% ----------------------------------------------------------------------------
+    \Cellp{6.4cm}{ 
+      \texttt{closest(X, XNew, ...)}
+    } &  
+    &
+    \Cellp{6.6cm}{
+      Find the points in \texttt{X} that are closest to those in \texttt{XNew}.
+    }
+    \\ \hline
+    %% ----------------------------------------------------------------------------
+    \Cellp{6.4cm}{
+      \texttt{dim}
+    } & 
+    & 
+    \Cellp{6.6cm}{
+      Get the dimension $d$. 
+    }
+    \\  \hline
+    %% ----------------------------------------------------------------------------
+    \Cellp{6.4cm}{
+      \texttt{dimnames} \\
+      \texttt{dimnames<-}
+    } &  
+    & 
+    \Cellp{6.6cm}{
+      Get or set the dimension names.
+    } \\  \hline
+    %% ----------------------------------------------------------------------------
+    \Cellp{6.4cm}{
+      \texttt{nlevels} \\
+      \texttt{levels}
+    } &  
+    & 
+    \Cellp{6.6cm}{
+      Get the number and values of the levels.
+    } \\ \hline
+    %%-----------------------------------------------------------------------------
+    \Cellp{6.4cm}{ 
+      \texttt{plot(x, y, jitter = FALSE, ...)}
+    } &  
+    &
+    \Cellp{6.6cm}{
+      Pairs plot for a \texttt{Grid} object \texttt{x}.
+    }
+    \\ \hline
+    %%----------------------------------------------------------------------------
+    \Cellp{6.4cm}{
+      \texttt{sampleIn} 
+    } & 
+    \texttt{y} & 
+    \Cellp{6.6cm}{
+      Draw \texttt{size} random  points in a grid. Formal \texttt{atSample}.
+    }
+    \\  \hline
+    %% ----------------------------------------------------------------------------
+    \Cellp{6.4cm}{
+      \texttt{show} 
+    } & 
+    & 
+    \Cellp{6.6cm} {
+      Show information about the object.
+    } 
+    \\  \hline \hline
+    %% ----------------------------------------------------------------------------
+    \multicolumn{1}{|c|}{\textit{Function}\rule[-0.7em]{0pt}{2.0em}} & 
+    \multicolumn{1}{c|}{\textit{df?}} & 
+    \multicolumn{1}{c|}{\textit{Goal}} \\ \hline
+    %% ----------------------------------------------------------------------------
+    \Cellp{6.4cm}{
+      \texttt{apply\_Grid(X, fun)} 
+    } & 
+    \texttt{n} & 
+    \Cellp{6.6cm}{
+      Apply the function \texttt{fun} to each node of a grid~\texttt{X}. 
+    } 
+    \\ \hline
+    %% ----------------------------------------------------------------------------
+    \Cellp{6.4cm}{
+      \texttt{array\_Grid(X, Y)} 
+    }
+    & \texttt{n} &    
+    \Cellp{6.6cm}{
+      Reshape as array the response(s) \texttt{Y} for a grid~\texttt{X}.
+     }
+    \\ \hline
+    %% ----------------------------------------------------------------------------
+    \Cellp{6.4cm}{ 
+      \texttt{boundary\_Grid(X)} 
+     } & 
+     \texttt{n} &  
+     \Cellp{6.6cm}{
+       Identify the boundary points in a grid \texttt{X}.
+     } 
+     \\ \hline
+     %% ----------------------------------------------------------------------------
+     \Cellp{6.4cm}{
+       \texttt{drop\_Grid(X)} 
+     } & 
+     \texttt{n} & 
+     \Cellp{6.6cm}{
+       Drop ``flat'' dimensions with only one level. 
+     }
+     \\ \hline
+     %% ----------------------------------------------------------------------------
+     \Cellp{6.4cm}{
+       \texttt{range\_Grid(X)} 
+     } & 
+     \texttt{y} & 
+     \Cellp{6.6cm}{
+       Get the ranges as a $2$-rows matrix. 
+     }
+     \\  \hline
+     %% ----------------------------------------------------------------------------
+     \Cellp{6.4cm}{
+       \texttt{scale\_Grid(X, fromRange, toRange)} 
+     } &
+     \texttt{y} &
+     \Cellp{6.6cm}{
+       Transform to $[0, 1]^d$ or to a given hyper-rectangle.
+     }
+     \\ \hline 
+     %% ----------------------------------------------------------------------------
+     \Cellp{6.4cm}{
+       \texttt{subset\_Grid(X, subset, type, drop)} 
+     } & \texttt{n} & 
+     \Cellp{6.6cm}{
+       Extract a sub-grid.
+     }
+     \\ \hline 
+    
+  \end{tabular}
+  \caption{\label{Gridfuns}
+    Methods and functions. For the ``\texttt{*\_Grid} functions'' with name
+    ending by \texttt{\_Grid}, the first part of the name is most of time not a method name,
+    e.g. \texttt{drop} is not a method as long as only base packages are used. The functions 
+    for which \texttt{X} can be a matrix or data frame are shown by a \texttt{y} in the 
+    column \textit{df?}. 
+  }
+\end{table}
+
+
+% \chapter{Scattered v.s. grid  interpolation}
+
+% \section{Example from nuclear industry}
+% %%----------------------------------------------------
+% We consider a dataset provided as a \textit{Saphyb} file. The file 
+% will be \pkg{rganlib} package XXX.
+
+\printindex
+
+\end{document}
