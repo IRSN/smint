@@ -1,8 +1,8 @@
 Package: smint
 Type: Package
 Title: Smooth Multivariate Interpolation for Gridded and Scattered Data
-Version: 0.4.0
-Date: 2015-05-12
+Version: 0.4.1
+Date: 2015-08-20
 Author: Yves Deville <deville.yves@alpestat.com> Yann Richet
     <yann.richet@irsn.fr>. Fortran codes by William Thacker, Manjula Iyer
     Jingwei Zhang, Laynet Watson, Jeffrey Birch, Manjula Iyer, Michael Berry

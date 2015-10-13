@@ -1,8 +1,10 @@
 useDynLib(smint)
-importFrom(Matrix, invPerm)
-importFrom(lattice, wireframe)
+importFrom("graphics", "plot", "pairs")
+importFrom("stats", "approx", "rnorm", "rpois", "runif")
+importFrom("utils", "head")
+importFrom(Matrix, "invPerm")
+importFrom(lattice, "wireframe")
 import(methods)
-importFrom("graphics", plot)
 
 exportClasses(Grid)
 

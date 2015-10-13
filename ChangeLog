@@ -1,3 +1,18 @@
+2015-08-18  yves  <deville.yves@alpestat.com>
+
+	* Changed NAMESPACE to add imports suggested by CRAN check
+	results.
+
+2015-08-14  yves  <deville.yves@alpestat.com>
+
+	* Changed a few words in 'smintGuide'.
+
+	* Changed the code of the c function 'grid_int' to remove the
+	SETLENGTH statement, likely conflicting with the garbage
+	collector. Rather than a temporary vector 'f' with changing
+	length, we now use a temporary list of numeric vectors with
+	different lengths.
+
 2015-06-04  yves  <deville.yves@alpestat.com>
 
 	* Renamed the package as 'smint' instead of 'mint' because the

@@ -182,7 +182,7 @@ institute IRSN\footnote{Institut de Radioprotection et de Sûreté
 interpolation for typical dimensions between $3$ and $7$, as
 required for instance in the study of nuclear cross-sections. 
 The two classical contexts of interpolation, namely \textit{gridded
-  data} and \textit{scattered data} are of interest.
+  data} and \textit{scattered data}, are of interest.
 
 
 We assume to be given $n$ distinct vectors $\m{x}_i$ called
@@ -291,7 +291,7 @@ Each point shown in a pair panel corresponds to \textit{several} grid
 points having the same two-dimensional projection. This problem gets
 more crucial with grids in higher dimension, since many points can
 then be collapsed into one. Using semi-transparent (translucent)
-colors can be of some help, see later.
+colours can be of some help, see later.
 
 \begin{figure}
   \centering
@@ -299,7 +299,7 @@ colors can be of some help, see later.
     \includegraphics[width=5cm]{./images/grid3d.png} &
     \includegraphics[width=10cm]{./Rgraphics/fig-plotdf-1.pdf}
   \end{tabular}
-  \caption{\label{TwoPlots} left: three-dimensional representation of the grid using
+  \caption{\label{TwoPlots} Left: three-dimensional representation of the grid using
     \pkg{rgl}. Right: using the \texttt{plot} method for data frames.}
 \end{figure}
 
@@ -314,7 +314,7 @@ f <- with(df, x^3 + 2 * y + z^2)
 
 \noindent
 Yet a function can easily be applied to each row of the data frame
-in a matrix fashion. For instance $f(x, \, y, \, z) := x^3 + 2y + z^2$
+in a matrix fashion, for instance $f(x, \, y, \, z) := x^3 + 2y + z^2$.
 
 <<>>=
 my3dFun <- function(x) x[1]^3 + 2 * x[2] + x[3]^2
@@ -357,13 +357,13 @@ finding the boundary points of the grid from the data frame
 representation is no more straightforward. Using a data frame with
 attributes could help in many problems. However, it should then be
 checked that the order of the columns remains the same in the data
-frame and in the list, and the data frame contains as assumed a tensor
-product of finite sets.
+frame and in the list, and also that the data frame contains a tensor
+product of finite sets as assumed.
 
 In the \pkg{smint} package, it was decided to define a S4 class for the
 grid under the name \verb@Grid@, in the aim that standard methods
 give the frequently needed information. As in the data frame
-representation, the nodes will be considered as ordered so a
+representation, the nodes will be considered as ordered --~so a
 \verb@Grid@ object can be thought of as a \textit{traveller salesman's
 path} visiting each node of the grid exactly once.
 
@@ -408,10 +408,10 @@ myGrid2
 @ 
 
 \noindent
-Note that the default dimnanes are \verb@"X1"@, \verb@"X2"@ and so on,
-but can be specified by using a named vector for the number of
+The dimnanes are by default \verb@"X1"@, \verb@"X2"@ and so on,
+but they can be specified by using a named vector for the number of
 levels. They can also be changed by using the replacement method
-\verb@dimnames<-@ as illustrated before.
+\verb@dimnames<-@ illustrated before.
 
 Another possibility to create a \verb@Grid@ object
 is to use the \verb@randGrid@ which generates 
@@ -428,13 +428,14 @@ levels(rGrid)
 \noindent
 The user can control some features of the object by using the optional
 arguments of \verb@randGrid@ such as \verb@dim@ or
-\verb@nlevels@. Note that a \verb@Grid@ object with moderate
+\verb@nlevels@. Be aware that a \verb@Grid@ object with moderate
 dimension, e.g. $6$ or $7$ might then have a considerable number of
 nodes.
 
 \subsection*{Back to data frames}
 %%---------------------------
-One of the most common operation is the transformation of the object into a data frame
+One of the most common operation is the transformation of the object
+into a data frame.
 
 <<>>=
 df <- as.data.frame(myGrid1)
@@ -459,9 +460,9 @@ only because of the rounding of the levels.
 
 Note that \verb@as.Grid@ will be quite slow for a large grid object.
 As a major difference with the data frame representation, a
-\verb@GriData@ stores all the $n$ possible combinations of the levels
+\verb@Grid@ object stores all the $n$ possible combinations of the levels
 as vectors of length~$d$ with \textit{integer} values rather than
-double. So for a large grid, the \verb@Grid@ representation needs only
+doubles. So for a large grid, the \verb@Grid@ representation needs only
 about $1/8$ of the space required by the data frame representation.
 
 \subsection*{Plot method}
@@ -476,18 +477,17 @@ several points in the $d$-dimensional space collapse into the same
 projection in a particular pair plot. A simple way to avoid this is to
 jitterise the points. A \verb@jitter@ argument was added to the
 \verb@as.data.frame@ coercion method and to the \verb@plot@
-method. Combined with semi-transparent colors, a improved
-representation results
-
+method. Combined with semi-transparent colours, an improved
+representation results, see figure~\ref{plotdfGrid}.  The points can
+be given different colours, size, ... by using vectors.  Remind that
+the order of points is then essential.
+%
 <<label="plotGrid", include=FALSE>>=
 myCol <- DiceView:::translude("ForestGreen", alpha = 0.6)
 plot(myGrid1, jitter = TRUE, pch = 16, col = myCol, cex = 1.2)
 @ 
-
+%
 \noindent
-See figure~\ref{plotdfGrid}.  The points can be given different colors,
-size, ... by using vectors.  Remind then that the order of points is
-then essential.
 
 \begin{figure}
   \begin{tabular}{c c} 
@@ -509,7 +509,7 @@ A grid in which one dimension has only one level
 will be said to be flat. This can be compared to a flat array, e.g. a
 matrix with one row or one column. By default, R drops the unnecessary
 dimensions of flat arrays when subsetting, and the user can also do
-this on purpose by using the \verb@drop@ function. A similar operation
+this on purpose with the \verb@drop@ function. A similar operation
 is possible for \verb@Grid@ objects by using the \verb@drop_Grid@
 function which drops the dimensions of flat grids
 
@@ -668,8 +668,8 @@ needed.
 When $d=2$, a common practice is to provide a response as a matrix
 with row $i$ corresponding to the $i$-th value of the first dimension
 $x_1$ (or $x$) and the column $j$ matching the $j$-th value of the
-second dimension $x_2$ (or $y$).  This form is often require to
-produce contour plot or a perspective plot (not shown here).  The
+second dimension $x_2$ (or $y$).  This form is often required to
+produce a contour plot or a perspective plot (not shown here).  The
 \verb@array_Grid@ function can be used for that.
 
 <<label="contour", fig.keep="none">>=
