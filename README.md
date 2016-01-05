@@ -39,3 +39,4 @@ Usage
              col = c("black", "SpringGreen3", "SteelBlue2"),
              lty = 1:3, lwd = rep(2, 3))
 ```
+![](Rplot.png)
