@@ -1,3 +1,4 @@
 src/905A/Fortran95/Drivers/*.f95 linguist-vendored
 src/905A/Fortran95/Src/*.f95 linguist-vendored
+# Not true but only way to keep github considering as an R project ...
 src/* linguist-vendored
