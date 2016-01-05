@@ -1,2 +1,2 @@
-src/905A/Fortran95/Drivers/* linguist-vendored
-src/905A/Fortran95/Src/* linguist-vendored
+src/905A/Fortran95/Drivers/*.f95 linguist-vendored
+src/905A/Fortran95/Src/*.f95 linguist-vendored
