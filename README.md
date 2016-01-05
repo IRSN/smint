@@ -15,6 +15,9 @@ install_github("IRSN/smint")
 
 Usage 
 -----------
+Complete user guide is here: [smintGuide.pdf](https://github.com/IRSN/smint/blob/ec795cf4457437972285bd435d546f62427cbeff/inst/doc/smintGuide.pdf)
+
+Basic example:
 ```r
      set.seed(12345)
      n <- 6; nout <- 300L
