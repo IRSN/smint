@@ -1,3 +1,7 @@
+2016-01-10  yves  <yves@yves-HP-ProBook-4535s>
+
+	* Fixed error in 'gridInt.R' using 'dimnames' with a bad object.
+
 2015-08-18  yves  <deville.yves@alpestat.com>
 
 	* Changed NAMESPACE to add imports suggested by CRAN check

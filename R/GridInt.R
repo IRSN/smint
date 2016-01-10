@@ -215,7 +215,7 @@ gridInt <- function(X, Y, Xout,
     }
     
     xLevels <- levels(X)
-    cxLevels <- apply(xLevels, as.character)
+    cxLevels <- lapply(xLevels, as.character)
     nx <- nlevels(X)
     rx <- sapply(xLevels, range)
      
