@@ -22,7 +22,7 @@
     Package: \tab smint\cr
     Type: \tab Package\cr
     Version: \tab 0.4-1\cr
-    Date: \tab 2015-08-20\cr
+    Date: \tab 2016-01-11\cr
     License: \tab GPL-3\cr
     LazyLoad: \tab yes\cr
   }
