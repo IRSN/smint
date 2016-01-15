@@ -21,8 +21,8 @@
   \tabular{ll}{
     Package: \tab smint\cr
     Type: \tab Package\cr
-    Version: \tab 0.4-1\cr
-    Date: \tab 2016-01-11\cr
+    Version: \tab 0.4-2\cr
+    Date: \tab 2016-01-14\cr
     License: \tab GPL-3\cr
     LazyLoad: \tab yes\cr
   }

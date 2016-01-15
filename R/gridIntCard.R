@@ -111,7 +111,7 @@ gridIntCB <- function(X, Y, Xout,
   }
   
   xLevels <- smint::levels(X)
-  cxLevels <- as.character(xLevels)
+  cxLevels <- lapply(xLevels, as.character)
   d <- dim(X)
   nLevels <- as.integer(smint::nlevels(X))
   ## print(xLevels)
