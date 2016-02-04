@@ -43,3 +43,6 @@ Basic example:
              lty = 1:3, lwd = rep(2, 3))
 ```
 ![](Rplot.png)
+
+
+![Analytics](https://ga-beacon.appspot.com/UA-109580-20/smint)
