@@ -1,4 +1,11 @@
-2016-01-10  yves  <yves@yves-HP-ProBook-4535s>
+2016-09-09  yves  <yves@alpestat.com>
+
+	* Fixed possible problems in 'gridIntCard.c' due to unused 'f'.
+	The object 'x' therein did not seem to be really needed either. 
+	The line 'PROTECT(R_fcall = ...' was moved after protecting 'xout',
+	as a possible source of problem.
+
+2016-01-10  yves  <yves@alpestat.com>
 
 	* Fixed error in 'gridInt.R' using 'dimnames' with a bad object.
 

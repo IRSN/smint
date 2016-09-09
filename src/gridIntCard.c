@@ -22,8 +22,9 @@ SEXP grid_int_CB(SEXP F,          // vector array of response values dim 'dim'
 		 SEXP Xout,       // matrix of output values nout * d
 		 SEXP interpCB ,  // Cardinal Basis
 		 SEXP rho) {      // An R environment
-  
-  SEXP dimXout, x, f, h, R_fcall, fout, foutprov, xout, Fprov;
+
+  // removed 'x' from this list Yves 2016-09-09
+  SEXP dimXout, h, R_fcall, fout, foutprov, xout, Fprov;
 
   int  i, j, k, ell, d = length(nLev), nout,
     *inLev = INTEGER(nLev), *inStar = INTEGER(nStar); 
@@ -34,7 +35,7 @@ SEXP grid_int_CB(SEXP F,          // vector array of response values dim 'dim'
   if (!isVector(F)) error("'F' must be a vector");
   if (!isVector(nLev)) error("'nLev' must be a vector");
   if (!isVector(nStar)) error("'nStar' must be a vector");
-  //if (!isList(xLev)) error("'xLev' must be a list");  
+  if (!isNewList(xLev)) error("'xLev' must be a list");  
   if (!isMatrix(Xout)) error("'Xout' must be a matrix");
   if (!isFunction(interpCB)) error("'interpCB' must be a function");
   if (!isEnvironment(rho)) error("'rho' should be an environment");
@@ -57,12 +58,13 @@ SEXP grid_int_CB(SEXP F,          // vector array of response values dim 'dim'
 #endif 
   
   // prepare SEXP
-  PROTECT(R_fcall = lang3(interpCB, x, xout));
   PROTECT(xout = allocVector(REALSXP, 1));
   PROTECT(fout = allocVector(REALSXP, nout)); 
   PROTECT(foutprov = allocVector(REALSXP, 1));
   PROTECT(Fprov = allocVector(REALSXP,inStar[d]));
- 
+
+  PROTECT(R_fcall = lang3(interpCB, VECTOR_ELT(xLev, 0), xout));
+
   // allocate h to the max used number of levels. Yet the length
   // of the R object may be set to a smaller value in the loop
   ell = inLev[d - 1];
