@@ -838,9 +838,8 @@ FUNCTION QSMVAL(M, N, P, X, F, NR, RMAX, &
  logical FIRST, NODES, CELLS, LAYERS, BRK
 
  ! 9 new variables added by Yves Deville to remove 'USE QSHEPMDATA'
- double precision A(N, NTT), DX(M), XMIN(M), RSQ(N), WS(NTT*NTT), IW(M,5)
  integer NTT, LCELL(NR**M), LNEXT(N)
-
+ double precision A(N, NTT), DX(M), XMIN(M), RSQ(N), WS(NTT*NTT), IW(M,5)
 
  L=0
  LN=0
@@ -1250,9 +1249,10 @@ FUNCTION QSMVAL(M, N, P, X, F, NR, RMAX, &
   integer I, J, IJ, MT, NNT, ISTART
   double precision D, W0, W1, W2, DXJ, FK
 
+
   ! 9 new variables added by Yves Deville to remove 'USE QSHEPMDATA'
-  double precision A(N, NTT), DX(M), XMIN(M), RSQ(N), WS(NTT*NTT), IW(M,5)
   integer NTT, NREM, LCELL(NREM), LNEXT(N)
+  double precision A(N, NTT), DX(M), XMIN(M), RSQ(N), WS(NTT*NTT), IW(M,5)
   
   ISTART=IROW-1
   MT=(M*(M+1))/2
@@ -1395,8 +1395,8 @@ FUNCTION QSMVAL(M, N, P, X, F, NR, RMAX, &
   double precision RNR 
 
   ! 9 new variables added by Yves Deville to remove 'USE QSHEPMDATA'
-  double precision A(N, NTT), DX(M), XMIN(M), RSQ(N), WS(NTT*NTT), IW(M,5)
   integer NTT, LCELL(NR**M), LNEXT(N)
+  double precision A(N, NTT), DX(M), XMIN(M), RSQ(N), WS(NTT*NTT), IW(M,5)
   
   IF ((M<1) .OR. (N<2) .OR. (NR<1)) THEN
      IER=1

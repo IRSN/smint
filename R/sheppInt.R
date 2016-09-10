@@ -42,9 +42,9 @@
 ##' @param nR Number of divisions in each dimension for the cell grid
 ##' defined in the subroutine \code{storem}.  A hyperbox containing
 ##' the nodes is partitioned into cells in order to increase search
-##' efficiency.  The recommended value \eqn{(n/3)^(1/d)} is used as
-##' default, where \eqn{n} is the number of nodes and \eqn{d} is the
-##' dimension.
+##' efficiency.  The recommended value \eqn{(n/3)^{(1/d)}}
+##' is used as default, where \eqn{n} is the number of
+##' nodes and \eqn{d} is the dimension.
 ##'
 ##' @param deriv Logical or integer value in \code{c(0, 1)}. When the
 ##' (coerced) integer value is \code{1}, the derivatives are computed.

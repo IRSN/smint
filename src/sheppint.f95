@@ -113,7 +113,6 @@ subroutine SHEPQ2G(N, X, Y, F, NNEW, XNEW, YNEW, FNEW, &
   double precision X(N), Y(N), F(N), RSQ(N)
   double precision XNEW(NNEW), YNEW(NNEW), FNEW(NNEW, 3)
   double precision RMAX, XNEW1, YNEW1, Q, QX, QY
-  double precision QS2VAL
 
   ! new args
   double precision A(5,N), DX, DY, XMIN, YMIN 
@@ -201,7 +200,6 @@ subroutine SHEPQ3G(N, X, Y, Z, F, NNEW, XNEW, YNEW, ZNEW, FNEW, &
   double precision X(N), Y(N), Z(N), F(N), RSQ(N)
   double precision XNEW(NNEW), YNEW(NNEW), ZNEW(NNEW), FNEW(NNEW, 4)
   double precision RMAX, XNEW1, YNEW1, ZNEW1, Q, QX, QY, QZ
-  double precision QS2VAL
 
   double precision A(9,N), XYZMIN(3), XYZDEL(3) 
   integer LCELL(NR, NR, NR), LNEXT(N) 
