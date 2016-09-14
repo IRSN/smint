@@ -7,4 +7,4 @@ os:
   - linux
   - osx
 before_install:
-  - if [ "$TRAVIS_OS_NAME" = "osx" ] ; then brew update ; brew install gfortran48; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ] ; then brew update ; brew install gfortran; fi
