@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/IRSN/smint.png)](https://travis-ci.org/IRSN/smint)
+
 # smint: Smooth Multivariate Interpolation for Gridded and Scattered Data
 
 Installation
