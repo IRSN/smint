@@ -227,14 +227,14 @@ interp_Grid <- function(X, Y, Xout,
         res <- gridIntCB(X, Y, Xout,
                          interpCB = cardinalBasis1d,
                          intOrder = intOrder,
-                         trace = 1L,
+                         trace = trace,
                          ...) 
     } else {
         res <- gridInt(X, Y, Xout,
                        interpFun = interpFun1d,
                        intOrder = intOrder,
                        useC = useC,
-                       trace = 1L,
+                       trace = trace,
                        ...) 
     }
     
