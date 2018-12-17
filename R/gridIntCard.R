@@ -193,10 +193,10 @@ gridIntCB <- function(X, Y, Xout,
       
   rho <- new.env()
   environment(interpCB) <- rho
-  cat("using '.Call'\n")
+  if (trace) cat("using '.Call'\n")
   ## print(class(xLevels))
 
-  print(interpCB)
+  #print(interpCB)
   
   res <- .Call("grid_int_CB",
                Yout,
