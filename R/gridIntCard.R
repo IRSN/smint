@@ -49,6 +49,8 @@
 ##
 ## @param trace Level of verbosity.
 ##
+## @param out_of_bounds Function to handle Xout outside x (default is stop). Then Xout will be bounded by x range.
+##
 ## @param intOrder Order of the one-dimensional interpolations. Must
 ## be a permutation of \code{1:d} where \code{d} is the spatial
 ## dimension.  NOT IMPLEMENTED YET. This argument is similar to the
@@ -95,6 +97,7 @@ gridIntCB <- function(X, Y, Xout,
                       interpCB = function(x, xout){ cardinalBasis_lagrange(x = x, xout = xout)$CB },
                       intOrder = NULL,
                       trace = 1L,
+                      out_of_bounds=stop,
                       ...) {
 
   ##===========================================================================
@@ -141,15 +144,19 @@ gridIntCB <- function(X, Y, Xout,
   }
   ## check that each 'Xout' values is in the interpolation range 
   rXout <- apply(Xout, 2, range)
+  
   ind <- (rXout[1L, ] < rx[1L, ])
   if (any(ind)) {
-    stop("'Xout' values too small for cols ", (1:d)[ind])
-  }
-  ind <- (rXout[2L, ] > rx[2L, ])
-  if (any(ind)) {
-    stop("'Xout' values too large for cols ", (1:d)[ind])
+    out_of_bounds("'Xout' values too small for cols ", (1:d)[ind])
+    for (ic in 1:ncol(Xout)) Xout[,ic] = pmax(rx[1L, ic],Xout[,ic])
   }
   
+  ind <- (rXout[2L, ] > rx[2L, ])
+  if (any(ind)) {
+    out_of_bounds("'Xout' values too large for cols ", (1:d)[ind])
+    for (ic in 1:ncol(Xout)) Xout[,ic] = pmin(rx[2L, ic],Xout[,ic])
+  }
+
   ##===========================================================================
   ## check that 'Y' is correct. Accepted objects are
   ##    o a vector with length 'nNodes'.
