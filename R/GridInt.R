@@ -59,6 +59,8 @@
 ##
 ## @param trace Level of verbosity.
 ##
+## @param out_of_bounds Function to handle Xout outside x (default is stop). Then Xout will be bounded by x range.
+##
 ## @param ... Further arguments to be passed to \code{interpFun}.
 ##
 ## @return A single interpolated value when \code{Xout} is either a
@@ -154,6 +156,7 @@ gridInt <- function(X, Y, Xout,
                     intOrder = NULL,
                     useC = TRUE,
                     trace = 1L,
+                    out_of_bounds=stop,
                     ...) {
    
     ##=========================================================================
@@ -233,10 +236,16 @@ gridInt <- function(X, Y, Xout,
     rXout <- apply(Xout, 2, range)
 
     ind <- (rXout[1L, ] < rx[1L, ])
-    if (any(ind)) stop("'Xout' values too small for cols ", (1:d)[ind])
-
+    if (any(ind)) {
+      out_of_bounds("'Xout' values too small for cols ", (1:d)[ind])
+      for (ic in 1:ncol(Xout)) Xout[,ic] = pmax(rx[1L, ic],Xout[,ic])
+    }
+  
     ind <- (rXout[2L, ] > rx[2L, ])
-    if (any(ind)) stop("'Xout' values too large for cols ", (1:d)[ind])
+    if (any(ind)) {
+      out_of_bounds("'Xout' values too large for cols ", (1:d)[ind])
+      for (ic in 1:ncol(Xout)) Xout[,ic] = pmin(rx[2L, ic],Xout[,ic])
+    }
     
     ##=======================================================================
     ## Check 'interpfun'. Formal 'y' must now come in first position in
