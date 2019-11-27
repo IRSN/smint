@@ -130,10 +130,10 @@ gridIntCB <- function(X, Y, Xout,
   ## could be implemented.
   ##===========================================================================
   if (is.matrix(Xout)) {
-    if (ncol(Xout) != d) stop("matrix 'X' with incorrect number of columns")
+    if (ncol(Xout) != d) stop("matrix 'Xout' with incorrect number of columns")
     nOut <- nrow(Xout)
   } else {
-    if (length(Xout) != d) stop("when 'X' is not a matrix, it must be a",
+    if (length(Xout) != d) stop("when 'Xout' is not a matrix, it must be a",
                 " vector of length 'd', the interpolating dim")
     Xout <- matrix(Xout, nrow = 1)
     nOut <- 1L
