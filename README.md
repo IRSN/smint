@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/IRSN/smint.png)](https://travis-ci.org/IRSN/smint)
+[![R-CMD-check](https://github.com/IRSN/smint/actions/workflows/check-standard.yml/badge.svg)](https://github.com/IRSN/smint/actions/workflows/check-standard.yml)
+[![submit-CRAN](https://github.com/IRSN/smint/actions/workflows/submit-on-cran.yml/badge.svg)](https://github.com/IRSN/smint/actions/workflows/submit-on-cran.yml)
 
 # smint: Smooth Multivariate Interpolation for Gridded and Scattered Data
 

@@ -84,7 +84,7 @@ branin <- function (x) {
 ##' M.A. Iyer and M.W. Berry (2010). Algorithm 905: SHEPPACK: Modified
 ##' Shepard Algorithm for Interpolation of Scattered Multivariate Data
 ##' \emph{ACM Trans. on Math. Software} (TOMS) Vol. 37, n. 3.
-##' \href{http://dl.acm.org/citation.cfm?id=1824812}{link}
+##' \href{https://dl.acm.org/citation.cfm?id=1824812}{link}
 ##' 
 ##' @note These functions are also exported as elements of the
 ##' \code{ShepFuns} list.

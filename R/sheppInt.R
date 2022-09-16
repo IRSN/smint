@@ -62,7 +62,7 @@
 ##' 
 ##' @note This function is an R interface to the \code{qshepmd}
 ##' routine in the \pkg{SHEPPACK} Fortran package available on netlib
-##' \url{http://www.netlib.org} as algorithm 905A.
+##' \url{https://www.netlib.org} as algorithm 905A.
 ##'
 ##' The \code{qshepInt} function is an interface for the
 ##' \code{QSHEPMD} Fortran routine, while \code{qshepInt2d} and
@@ -83,12 +83,12 @@
 ##' M.A. Iyer and M.W. Berry (2010). Algorithm 905: SHEPPACK: Modified
 ##' Shepard Algorithm for Interpolation of Scattered Multivariate Data
 ##' \emph{ACM Trans. on Math. Software} (TOMS) Vol. 37, n. 3.
-##' \href{http://dl.acm.org/citation.cfm?id=1824812}{link}
+##' \href{https://dl.acm.org/citation.cfm?id=1824812}{link}
 ##' 
 ##' M.W. Berry and K.S. Minser (1999). Algorithm 798: High-dimensional
 ##' interpolation using the modified Shepard method. \emph{ACM
 ##' Trans. Math. Software} (TOMS) Vol. 25, n. 3, pp. 353-366.
-##' \href{http://dl.acm.org/citation.cfm?id=326147.326154}{link}
+##' \href{https://dl.acm.org/citation.cfm?id=326147.326154}{link}
 ##' 
 ##' @examples
 ##' n <- 1500; nNew <- 100; d <- 4

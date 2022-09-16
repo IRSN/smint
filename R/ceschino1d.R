@@ -46,7 +46,7 @@
 ##'
 ##' @references A. Hebert (2013) \emph{Revisiting the Ceschino
 ##' Interpolation Method}.
-##' \href{http://www.intechopen.com/download/pdf/21941}{link}.
+##' \href{https://www.intechopen.com/download/pdf/21941}{link}.
 ##'
 ##' 
 ##' @examples
