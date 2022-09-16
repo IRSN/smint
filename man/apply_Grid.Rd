@@ -39,4 +39,3 @@ apply_Grid(myGD, fun = function(x) exp(-x[1]^2 - 3 * x[2]^2 - 2 * x[3]^2))
 \seealso{
 \code{\link{array_Grid}} to reshape the result as an array.
 }
-

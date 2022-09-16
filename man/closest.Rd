@@ -3,8 +3,8 @@
 \docType{methods}
 \name{closest}
 \alias{closest}
-\alias{closest,Grid-method}
 \alias{closest,matrix-method}
+\alias{closest,Grid-method}
 \title{Find closest point(s) in a design or object.}
 \usage{
 closest(X, XNew, ...)
@@ -57,4 +57,3 @@ closest(X = g, XNew = XNew)
 X <- as.matrix(g)
 closest(X = X, XNew = XNew)
 }
-

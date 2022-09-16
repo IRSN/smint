@@ -1,4 +1,4 @@
-useDynLib(smint)
+useDynLib(smint, .registration = TRUE)
 importFrom("graphics", "plot", "pairs")
 importFrom("stats", "approx", "rnorm", "rpois", "runif")
 importFrom("utils", "head")

@@ -37,4 +37,3 @@ scale_Grid(as.data.frame(myGD))
 \seealso{
 \code{\link{range_Grid}}.
 }
-

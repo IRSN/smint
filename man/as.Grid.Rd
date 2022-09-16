@@ -18,4 +18,3 @@ An object with S4 class \code{"Grid"}.
 \description{
 Coercion of objects into \code{Grid}.
 }
-

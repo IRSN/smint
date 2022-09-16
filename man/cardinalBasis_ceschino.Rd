@@ -69,17 +69,16 @@ points(x = x, y = rep(0, n), pch = 21, col = "black",
 matlines(res$x, res$CB, type = "l")
 
 ## interpolation error should be fairly small
-max(abs(sin(2 * pi * xout) - res$CB \\\%*\\\% y))
+max(abs(sin(2 * pi * xout) - res$CB \%*\% y))
 
-}
-\author{
-Alain Hebert for Fortran code.
-
-Yves Deville for R interface.
 }
 \seealso{
 \code{\link{interp_ceschino}} for the related interpolation
 function, \code{\link{cardinalBasis_natSpline}} and \code{\link{cardinalBasis_lagrange}}
 for other Cardinal Basis constructions.
 }
+\author{
+Alain Hebert for Fortran code.
 
+Yves Deville for R interface.
+}

@@ -77,6 +77,5 @@ W.I. Thacker, J. Zhang, L.T. Watson, J.B. Birch,
 M.A. Iyer and M.W. Berry (2010). Algorithm 905: SHEPPACK: Modified
 Shepard Algorithm for Interpolation of Scattered Multivariate Data
 \emph{ACM Trans. on Math. Software} (TOMS) Vol. 37, n. 3.
-\href{http://dl.acm.org/citation.cfm?id=1824812}{link}
+\href{https://dl.acm.org/doi/10.1145/1824801.1824812}{link}
 }
-

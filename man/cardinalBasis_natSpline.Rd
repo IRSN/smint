@@ -69,16 +69,15 @@ der <- 0:2
 names(test) <- nms <- paste("deriv. ", der, sep = "")
 for (i in seq(along = der)) {
    resDer <- cardinalBasis_natSpline(x, xout = xout, deriv = der[i])
-   test[nms[i]] = max(abs(predict(sp, xout, deriv = der[i])$y - resDer$CB \\\%*\\\% y))
+   test[nms[i]] = max(abs(predict(sp, xout, deriv = der[i])$y - resDer$CB \%*\% y))
 }
 test
 ## Lebesgue's function
 plot(x = xout, y = apply(res$CB, 1, function(x) sum(abs(x))), type = "l",
-     lwd = 2, col = "orangered", main = "Lebesgue\\'s function", log = "y",
+     lwd = 2, col = "orangered", main = "Lebesgue\'s function", log = "y",
      xlab = "x", ylab = "L(x)")
 points(x = x, y = rep(1, n), pch = 21, col = "black", lwd = 2, bg = "white")
 }
 \author{
 Yves Deville
 }
-

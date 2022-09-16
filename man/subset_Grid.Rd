@@ -51,4 +51,3 @@ myGD2 <- subset_Grid(myGD, subset = Temp > 280)
 \seealso{
 The \code{\link{subset}} method.
 }
-

@@ -36,4 +36,3 @@ aF <- array_Grid(X = myGD, Y = F)
 \code{\link{apply_Grid}} to compute a vector of response for
 a given function.
 }
-

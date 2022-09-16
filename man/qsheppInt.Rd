@@ -67,7 +67,7 @@ form) as local approximation of the function.
 \note{
 This function is an R interface to the \code{qshepmd}
 routine in the \pkg{SHEPPACK} Fortran package available on netlib
-\url{http://www.netlib.org} as algorithm 905A.
+\url{https://netlib.org} as algorithm 905A.
 
 The \code{qshepInt} function is an interface for the
 \code{QSHEPMD} Fortran routine, while \code{qshepInt2d} and
@@ -122,6 +122,18 @@ max(abs(res$yNew - yNew))
            col = cols, pch = pchs, lwd = 2, pt.lwd = 2, pt.bg = "white")
 }
 }
+\references{
+W.I. Thacker, J. Zhang, L.T. Watson, J.B. Birch,
+M.A. Iyer and M.W. Berry (2010). Algorithm 905: SHEPPACK: Modified
+Shepard Algorithm for Interpolation of Scattered Multivariate Data
+\emph{ACM Trans. on Math. Software} (TOMS) Vol. 37, n. 3.
+\href{https://dl.acm.org/doi/10.1145/1824801.1824812}{link}
+
+M.W. Berry and K.S. Minser (1999). Algorithm 798: High-dimensional
+interpolation using the modified Shepard method. \emph{ACM
+Trans. Math. Software} (TOMS) Vol. 25, n. 3, pp. 353-366.
+\href{https://dl.acm.org/doi/10.1145/326147.326154}{link}
+}
 \author{
 Fortran code by William I. Thacker; Jingwei
 Zhang; Layne T. Watson; Jeffrey B. Birch; Manjula A. Iyer; Michael
@@ -130,16 +142,3 @@ of M.W Berry's C++ code.
 
 Code adaptation and R interface by Yves Deville.
 }
-\references{
-W.I. Thacker, J. Zhang, L.T. Watson, J.B. Birch,
-M.A. Iyer and M.W. Berry (2010). Algorithm 905: SHEPPACK: Modified
-Shepard Algorithm for Interpolation of Scattered Multivariate Data
-\emph{ACM Trans. on Math. Software} (TOMS) Vol. 37, n. 3.
-\href{http://dl.acm.org/citation.cfm?id=1824812}{link}
-
-M.W. Berry and K.S. Minser (1999). Algorithm 798: High-dimensional
-interpolation using the modified Shepard method. \emph{ACM
-Trans. Math. Software} (TOMS) Vol. 25, n. 3, pp. 353-366.
-\href{http://dl.acm.org/citation.cfm?id=326147.326154}{link}
-}
-

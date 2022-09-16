@@ -28,4 +28,3 @@ myGD1 <- drop_Grid(myGD)
 \seealso{
 The usual \code{\link{drop}} function for arrays.
 }
-

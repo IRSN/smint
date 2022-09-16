@@ -61,4 +61,3 @@ cols3 <- rep("black", length(myGD3))
 cols3[bd3] <- "red"
 plot(myGD3, jitter = TRUE, col = cols3, pch = 16, cex = 2, main = "Boundary points")
 }
-

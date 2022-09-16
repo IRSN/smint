@@ -2,9 +2,9 @@
 % Please edit documentation in R/GridData.R
 \name{as.Grid.default}
 \alias{as.Grid.default}
-\alias{as.Grid.list}
-\alias{as.Grid.matrix}
 \alias{as.Grid.numeric}
+\alias{as.Grid.matrix}
+\alias{as.Grid.list}
 \title{Coercion to \code{Grid}}
 \usage{
 \method{as.Grid}{default}(object, ...)
@@ -41,4 +41,3 @@ GDdf <- as.Grid(df)
 GDmat <- as.Grid(as.matrix(df))
 
 }
-

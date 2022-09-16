@@ -4,8 +4,13 @@
 \alias{randGrid}
 \title{Random drawing of a \code{Grid} object}
 \usage{
-randGrid(dim = 1L + rpois(1L, lambda = 3), nxMin = 1L, nxE = 4L, nlevels,
-  dimNames)
+randGrid(
+  dim = 1L + rpois(1L, lambda = 3),
+  nxMin = 1L,
+  nxE = 4L,
+  nlevels,
+  dimNames
+)
 }
 \arguments{
 \item{dim}{The spatial dimension.}
@@ -47,10 +52,9 @@ GD2 <- randGrid(nlevels = c(2, 3, 4))
 plot(GD2)
 
 }
-\author{
-Yves Deville
-}
 \seealso{
 \code{\link{Grid-class}}.
 }
-
+\author{
+Yves Deville
+}

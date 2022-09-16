@@ -67,7 +67,7 @@
 ##' matlines(res$x, res$CB, type = "l")
 ##' 
 ##' ## interpolation error should be fairly small
-##' max(abs(sin(2 * pi * xout) - res$CB \%*\% y))
+##' max(abs(sin(2 * pi * xout) - res$CB %*% y))
 ##' 
 cardinalBasis_ceschino <- function(x, xout, cubic = TRUE, deriv = 0) {
     
@@ -168,7 +168,7 @@ cardinalBasis_ceschino <- function(x, xout, cubic = TRUE, deriv = 0) {
 ##' names(test) <- nms <- paste("deriv. ", der, sep = "")
 ##' for (i in seq(along = der)) {
 ##'    resDer <- cardinalBasis_natSpline(x, xout = xout, deriv = der[i])
-##'    test[nms[i]] = max(abs(predict(sp, xout, deriv = der[i])$y - resDer$CB \%*\% y))
+##'    test[nms[i]] = max(abs(predict(sp, xout, deriv = der[i])$y - resDer$CB %*% y))
 ##' }
 ##' test
 ##' ## Lebesgue's function

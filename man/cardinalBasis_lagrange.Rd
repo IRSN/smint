@@ -57,4 +57,3 @@ matlines(res$x, res$CB, type = "l")
 L <- apply(res$CB, 1, function(x) sum(abs(x)))
 range(L)
 }
-

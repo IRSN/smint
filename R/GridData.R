@@ -373,8 +373,7 @@ as.Grid <- function(object, ...) {
 ##'
 ##' @aliases as.Grid.numeric as.Grid.matrix as.Grid.list
 ##'
-##' @S3method as.Grid default
-##' @S3method as.Grid data.frame
+##' @method as.Grid default
 ##'
 ##' @param object An object to be coerced into a \code{Grid} object.
 ##'

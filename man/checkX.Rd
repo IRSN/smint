@@ -3,8 +3,8 @@
 \docType{methods}
 \name{checkX}
 \alias{checkX}
-\alias{checkX,Grid-method}
 \alias{checkX,matrix-method}
+\alias{checkX,Grid-method}
 \title{Check designs: size and colnames}
 \usage{
 checkX(X, XNew, ...)
@@ -42,4 +42,3 @@ XNew <- matrix(1:3, ncol = 3)
 XNewMod <- checkX(X = X, XNew = XNew)$XNew
 XNewMod
 }
-

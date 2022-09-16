@@ -25,4 +25,3 @@ range_Grid(myGD)
 range_Grid(as.data.frame(myGD))
 range_Grid(as.matrix(myGD))
 }
-

@@ -92,12 +92,11 @@ legend("bottomright", legend = c("true", "Ceschino", "nat. spline"),
        lty = 1:3, lwd = rep(2, 3))
 
 }
-\author{
-Fortran code by Alain Hebert.
-}
 \references{
 A. Hebert (2013) \emph{Revisiting the Ceschino
 Interpolation Method}.
-\href{http://www.intechopen.com/download/pdf/21941}{link}.
+\href{https://www.intechopen.com/chapters/21941}{link}.
 }
-
+\author{
+Fortran code by Alain Hebert.
+}

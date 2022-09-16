@@ -58,4 +58,3 @@ sum(abs(as.matrix(g)[attr(X2, "index"), ] - X2))
 \seealso{
 The \code{\link{sample}} function.
 }
-

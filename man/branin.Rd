@@ -55,4 +55,3 @@ spheres3d(Xout2[ , 1], Xout2[ , 2], GIS, col = "orangered",
 \author{
 David Ginsbourger
 }
-

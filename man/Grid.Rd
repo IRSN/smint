@@ -52,4 +52,3 @@ levels(myGD2)
 \author{
 Yves Deville
 }
-

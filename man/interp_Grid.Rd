@@ -205,4 +205,3 @@ rbind(gridInt_C = t5a, gridInt_R = t5b, gridIntCB = t5c)
 \author{
 Yves Deville
 }
-

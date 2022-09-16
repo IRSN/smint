@@ -26,4 +26,3 @@ round_levels( 10 + (1:3) / 10^5)
 ## bad
 round_levels( 10 + (1:3) / 10^6)
 }
-
