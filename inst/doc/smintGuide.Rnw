@@ -118,13 +118,13 @@
 
 
 %% preliminary chunks (not echoed) 
-<<include=FALSE, echo=FALSE>>=
+<<include=FALSE, echo=FALSE, message=FALSE>>=
 library(knitr)
 opts_chunk$set(fig.path='Rgraphics/fig-', dev='pdf', tidy=FALSE)
 @
 
 \setkeys{Gin}{width=7cm}
-<<options, echo = FALSE, results = "hide">>=
+<<options, echo=FALSE, results="hide", message=FALSE>>=
 options(prompt = "R> ", continue = "   ", width = 80)
 library(smint)
 smint.Version <- packageVersion("smint")
@@ -325,7 +325,7 @@ max(abs(f - f2))
 \label{my3dFun}%
 \noindent
 Note that the order of the columns is essential here, while it was
-immaterial in the computation of \verb@f2@ above.
+immaterial in the computation of \verb@f@ above.
 Since each grid dimension is mapped to a column, it is quite easy
 to have a permutation of the dimensions.
 
@@ -348,7 +348,7 @@ representation.
 The data frame representation is convenient for many common operations
 involving grids. However some apparently simple operations can be
 either tricky or inefficient.  For instance, retrieving the grid
-levels from data frame representation is quite tedious, since it
+levels from the data frame representation is quite tedious, since it
 requires something like a \verb@tapply@. Although the list of the
 levels was provided in the creation of the grid, this information is
 no longer readily accessible from the object, and it would be
@@ -360,12 +360,13 @@ checked that the order of the columns remains the same in the data
 frame and in the list, and also that the data frame contains a tensor
 product of finite sets as assumed.
 
-In the \pkg{smint} package, it was decided to define a S4 class for the
-grid under the name \verb@Grid@, in the aim that standard methods
-give the frequently needed information. As in the data frame
-representation, the nodes will be considered as ordered --~so a
-\verb@Grid@ object can be thought of as a \textit{traveller salesman's
-path} visiting each node of the grid exactly once.
+In the \pkg{smint} package, it was decided to define a S4
+\textit{class} for the grid objects, under the name \verb@Grid@, in
+the aim that standard \textit{methods} give the frequently needed
+information. As in the data frame representation, the nodes will be
+considered as ordered --~so a \verb@Grid@ object can be thought of as
+a \textit{traveller salesman's path} visiting each node of the grid
+exactly once.
 
 
 \section{Creating a \texttt{Grid} object}
