@@ -1,37 +1,39 @@
 ##***************************************************************************
-##' Check designs: size and colnames.
-##' 
-##' Check that the objects \code{XNew} and \code{X} are compatible
-##' for interpolation.
-##' 
-##' @title Check designs: size and colnames
-##' 
-##' @docType methods
-##' 
-##' @aliases checkX,matrix-method checkX,Grid-method 
-##'
-##' @param X Design or grid object.
-##'
-##' @param XNew Matrix containing (as rows) the points where
-##' interpolation must be done, or numeric vector with length \code{d}
-##' where \code{d} is the space dimension provided by \code{X}.
-##'
-##' @param ... Other arguments to be passed to methods.
-##'
-##' @return A list with a matrix element \code{XNew} corresponding to
-##' the wanted matrix possibly coerced and with colnames matching
-##' those of \code{X}.
-##'
-##' @note The order of the two formal arguments has been changed in
-##' version 0.0-4.  Former code using positional matching may lead to
-##' unexpected results.
-##'
-##' @examples
-##' X <- matrix(1:12, ncol = 3)
-##' colnames(X) <- c("Temp", "Press", "Volume")
-##' XNew <- matrix(1:3, ncol = 3)
-##' XNewMod <- checkX(X = X, XNew = XNew)$XNew
-##' XNewMod
+#' Check designs: size and colnames.
+#' 
+#' Check that the objects \code{XNew} and \code{X} are compatible
+#' for interpolation.
+#' 
+#' @title Check designs: size and colnames
+#' 
+#' @docType methods
+#' 
+#' @aliases checkX,matrix-method checkX,Grid-method 
+#'
+#' @param X Design or grid object.
+#'
+#' @param XNew Matrix containing (as rows) the points where
+#' interpolation must be done, or numeric vector with length \code{d}
+#' where \code{d} is the space dimension provided by \code{X}.
+#'
+#' @param ... Other arguments to be passed to methods.
+#' 
+#' @export
+#'
+#' @return A list with a matrix element \code{XNew} corresponding to
+#' the wanted matrix possibly coerced and with colnames matching
+#' those of \code{X}.
+#'
+#' @note The order of the two formal arguments has been changed in
+#' version 0.0-4.  Former code using positional matching may lead to
+#' unexpected results.
+#'
+#' @examples
+#' X <- matrix(1:12, ncol = 3)
+#' colnames(X) <- c("Temp", "Press", "Volume")
+#' XNew <- matrix(1:3, ncol = 3)
+#' XNewMod <- checkX(X = X, XNew = XNew)$XNew
+#' XNewMod
 setGeneric("checkX", function(X, XNew, ...) standardGeneric("checkX"))
 
 
@@ -97,55 +99,57 @@ setMethod("checkX",
           })
 
 ##*****************************************************************************
-##' Find closest point(s) in a design matrix or object.
-##'
-##' When \code{X} has class \code{"Grid"} weighting the factors
-##' has no impact on the (or a) closest point since for each factor
-##' there is normally one (and possibly two) level value(s) which
-##' minimises the distance to the corresponding value in the given new
-##' point (row) of \code{XNew}.
-##' 
-##' @title Find closest point(s) in a design or object.
-##'
-##' @docType methods
-##' 
-##' @aliases closest,matrix-method closest,Grid-method 
-##'
-##' @param X A matrix containing design points as rows or a
-##' \code{"Grid"} object.
-##'
-##' @param XNew A vector or matrix containing one or several 'new'
-##' design points.
-##' 
-##' @param ... Other arguments for methods.
-##'
-##' @return A list with elements
-##' \item{index}{
-##'
-##' Integer vector with length equal to the number of 'new' points. Contains
-##' the index of the closest point in \code{X}.
-##'
-##' }
-##' \item{value}{
-##'
-##' Matrix with one row for each 'new' design point containing the
-##' closest point as found in \code{X}.
-##'
-##' }
-##' \item{dist}{
-##'
-##' Numeric vector with length equal to the number of 'new' points. Contains
-##' the minimal distances.
-##' 
-##' }
-##'
-##' @examples
-##' ## levels at 0, 0.2, 0.4, 0.6, 0.8, 1.0
-##' g <- Grid(nlevels = c("x" = 6, "y" = 6, "z" = 6))
-##' XNew <- c(0.51, 0.61, 0.23)
-##' closest(X = g, XNew = XNew)
-##' X <- as.matrix(g)
-##' closest(X = X, XNew = XNew)
+#' Find closest point(s) in a design matrix or object.
+#'
+#' When \code{X} has class \code{"Grid"} weighting the factors
+#' has no impact on the (or a) closest point since for each factor
+#' there is normally one (and possibly two) level value(s) which
+#' minimises the distance to the corresponding value in the given new
+#' point (row) of \code{XNew}.
+#' 
+#' @title Find closest point(s) in a design or object.
+#'
+#' @docType methods
+#' 
+#' @aliases closest,matrix-method closest,Grid-method 
+#'
+#' @param X A matrix containing design points as rows or a
+#' \code{"Grid"} object.
+#'
+#' @param XNew A vector or matrix containing one or several 'new'
+#' design points.
+#' 
+#' @param ... Other arguments for methods.
+#' 
+#' @export
+#'
+#' @return A list with elements
+#' \item{index}{
+#'
+#' Integer vector with length equal to the number of 'new' points. Contains
+#' the index of the closest point in \code{X}.
+#'
+#' }
+#' \item{value}{
+#'
+#' Matrix with one row for each 'new' design point containing the
+#' closest point as found in \code{X}.
+#'
+#' }
+#' \item{dist}{
+#'
+#' Numeric vector with length equal to the number of 'new' points. Contains
+#' the minimal distances.
+#' 
+#' }
+#'
+#' @examples
+#' ## levels at 0, 0.2, 0.4, 0.6, 0.8, 1.0
+#' g <- Grid(nlevels = c("x" = 6, "y" = 6, "z" = 6))
+#' XNew <- c(0.51, 0.61, 0.23)
+#' closest(X = g, XNew = XNew)
+#' X <- as.matrix(g)
+#' closest(X = X, XNew = XNew)
 closest <- function(X, XNew, ...){ }
 if (!isGeneric("closest")) {
     setGeneric("closest", function(X, XNew, ...) standardGeneric("closest"))
@@ -203,23 +207,25 @@ setMethod("closest",
 
 
 ##******************************************************************************
-##' Round a vector (of levels). 
-##'
-##' @title Round a vector (of levels)
-##'
-##' @param x Numeric vector to be rounded.
-##'
-##' @return Rounded numeric vector.
-##' 
-##' @note At the time, this function can produce poor results
-##' when the relative variation in \code{x} is small.
-##'
-##' @examples
-##' ## good
-##' round_levels((1:3) / 10^5)
-##' round_levels( 10 + (1:3) / 10^5)
-##' ## bad
-##' round_levels( 10 + (1:3) / 10^6)
+#' Round a vector (of levels). 
+#'
+#' @title Round a vector (of levels)
+#'
+#' @param x Numeric vector to be rounded.
+#' 
+#' @export
+#'
+#' @return Rounded numeric vector.
+#' 
+#' @note At the time, this function can produce poor results
+#' when the relative variation in \code{x} is small.
+#'
+#' @examples
+#' ## good
+#' round_levels((1:3) / 10^5)
+#' round_levels( 10 + (1:3) / 10^5)
+#' ## bad
+#' round_levels( 10 + (1:3) / 10^6)
 round_levels <- function(x) {
     if (length(x) == 1) return(x)
     mx <- log(min(abs(diff(x))), 10)
@@ -229,23 +235,25 @@ round_levels <- function(x) {
 }
 
 ##***************************************************************************
-##' Range of a \code{Grid} object.
-##'
-##' @title Range of a \code{Grid} object
-##' 
-##' @param X An object with S4 class \code{"Grid"}, or an object
-##' with S3 class \code{"matrix"} or \code{"data.frame"} that can
-##' be coerced into a  \code{"Grid"} object.
-##'
-##' @return A numeric matrix with two rows representing the min
-##' and max of the levels for each dimension of the grid.
-##'
-##' @examples
-##' set.seed(1234)
-##' myGD <- randGrid(dim = 4)
-##' range_Grid(myGD)
-##' range_Grid(as.data.frame(myGD))
-##' range_Grid(as.matrix(myGD))
+#' Range of a \code{Grid} object.
+#'
+#' @title Range of a \code{Grid} object
+#' 
+#' @param X An object with S4 class \code{"Grid"}, or an object
+#' with S3 class \code{"matrix"} or \code{"data.frame"} that can
+#' be coerced into a  \code{"Grid"} object.
+#' 
+#' @export
+#'
+#' @return A numeric matrix with two rows representing the min
+#' and max of the levels for each dimension of the grid.
+#'
+#' @examples
+#' set.seed(1234)
+#' myGD <- randGrid(dim = 4)
+#' range_Grid(myGD)
+#' range_Grid(as.data.frame(myGD))
+#' range_Grid(as.matrix(myGD))
 range_Grid <- function(X) {
     if (is.data.frame(X)) {
         if (!all(sapply(X, is.numeric))) {
@@ -264,35 +272,37 @@ range_Grid <- function(X) {
 }
 
 ##***************************************************************************
-##' Scale a \code{Grid} object.
-##'
-##' @title Scale a \code{Grid} object.
-##'
-##' @param X An object with class \code{"Grid"} or which can be
-##' coerced into this class.
-##'
-##' @param fromRange A numeric vector of length \code{2} (min and max)
-##' or a matrix with \code{2} rows (min an max) and one column for
-##' each grid dimension in \code{X}. This object gives the original
-##' "old" range.
-##' 
-##' @param toRange A numeric vector of length \code{2} (min and max) or
-##' a matrix with \code{2} rows (min an max) and one column for
-##' each grid dimension in \code{X}.This object gives the target "new" range
-##' replacing the old one.
-##' 
-##' @return
-##' An object with the same class as \code{X} but with the
-##' each levels rescaled.
-##'
-##' @seealso \code{\link{range_Grid}}.
-##'
-##' @examples
-##' myGD <- Grid(levels = list(x = c(1, 3, 10), y = c(0, 1000, 2000, 3000)))
-##' scale_Grid(myGD)
-##' scale_Grid(as.matrix(myGD))
-##' scale_Grid(as.data.frame(myGD))
-##' 
+#' Scale a \code{Grid} object.
+#'
+#' @title Scale a \code{Grid} object.
+#'
+#' @param X An object with class \code{"Grid"} or which can be
+#' coerced into this class.
+#'
+#' @param fromRange A numeric vector of length \code{2} (min and max)
+#' or a matrix with \code{2} rows (min an max) and one column for
+#' each grid dimension in \code{X}. This object gives the original
+#' "old" range.
+#' 
+#' @param toRange A numeric vector of length \code{2} (min and max) or
+#' a matrix with \code{2} rows (min an max) and one column for
+#' each grid dimension in \code{X}.This object gives the target "new" range
+#' replacing the old one.
+#' 
+#' @export
+#' 
+#' @return
+#' An object with the same class as \code{X} but with the
+#' each levels rescaled.
+#'
+#' @seealso \code{\link{range_Grid}}.
+#'
+#' @examples
+#' myGD <- Grid(levels = list(x = c(1, 3, 10), y = c(0, 1000, 2000, 3000)))
+#' scale_Grid(myGD)
+#' scale_Grid(as.matrix(myGD))
+#' scale_Grid(as.data.frame(myGD))
+#' 
 scale_Grid <- function(X, fromRange = range_Grid(X), toRange = c(0, 1)) {
 
     if (is(X, "Grid")) d <- dim(X)
@@ -345,33 +355,35 @@ scale_Grid <- function(X, fromRange = range_Grid(X), toRange = c(0, 1)) {
 }
 
 ##***************************************************************************
-##' Reshape or coerce an array of responses.
-##'
-##' @title Reshape or coerce an array of responses
-##'
-##' @param X An object with class \code{"GriData"} or that can be
-##' coerced to this class.
-##'
-##' @param Y A vector of length \code{n} or a matrix with \code{n}
-##' rows where \code{n} is the number of nodes in \code{X}. In the
-##' first case, \code{Y} is coerced into a matrix with one column.
-##'
-##' @param dropCol Logical. When \code{Y} is a vector and \code{dropCol}
-##' is \code{TRUE}, the dimension of the array is \code{nlevels(X)}, else
-##' it is \code{c(nlevels(X), 1)}.
-##' 
-##' @return An array with dimension \code{c(nlevels(X), ncol(Y))} or
-##' \code{nlevels(X)} containing the elements of \code{Y} in
-##' correspondence with the levels of \code{X}.
-##'
-##' @seealso \code{\link{apply_Grid}} to compute a vector of response for
-##' a given function.
-##'
-##' @examples
-##' myGD <- Grid(nlevels = c(20, 25))
-##' F <- apply_Grid(myGD, branin)
-##' aF <- array_Grid(X = myGD, Y = F)
-##' 
+#' Reshape or coerce an array of responses.
+#'
+#' @title Reshape or coerce an array of responses
+#'
+#' @param X An object with class \code{"GriData"} or that can be
+#' coerced to this class.
+#'
+#' @param Y A vector of length \code{n} or a matrix with \code{n}
+#' rows where \code{n} is the number of nodes in \code{X}. In the
+#' first case, \code{Y} is coerced into a matrix with one column.
+#'
+#' @param dropCol Logical. When \code{Y} is a vector and \code{dropCol}
+#' is \code{TRUE}, the dimension of the array is \code{nlevels(X)}, else
+#' it is \code{c(nlevels(X), 1)}.
+#' 
+#' @export
+#' 
+#' @return An array with dimension \code{c(nlevels(X), ncol(Y))} or
+#' \code{nlevels(X)} containing the elements of \code{Y} in
+#' correspondence with the levels of \code{X}.
+#'
+#' @seealso \code{\link{apply_Grid}} to compute a vector of response for
+#' a given function.
+#'
+#' @examples
+#' myGD <- Grid(nlevels = c(20, 25))
+#' F <- apply_Grid(myGD, branin)
+#' aF <- array_Grid(X = myGD, Y = F)
+#' 
 array_Grid <- function(X, Y, dropCol = TRUE) {
 
     if (!is(X, "Grid"))  X <- as.Grid(X)

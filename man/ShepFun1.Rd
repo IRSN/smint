@@ -56,21 +56,22 @@ F <- apply(Xoutd, 1, ShepFun3)
 max(abs(F - GI))
 
 ## 3D plot
-require(lattice) 
-X <- as.data.frame(Grid(nlevels = c("x1" = 30, "x2" = 30)))
-df <- data.frame(x1 = numeric(0), x2 = numeric(0),
-                 f = numeric(0), i = numeric(0))
-for (i in 1:5) {
-   f <- apply(X, 1, ShepFuns[[i]])
-   df <- rbind(df, data.frame(x1 = X$x1, x2 = X$x2, f = f, i = i))
+if (requireNamespace("lattice")) {
+  X <- as.data.frame(Grid(nlevels = c("x1" = 30, "x2" = 30)))
+  df <- data.frame(x1 = numeric(0), x2 = numeric(0),
+                   f = numeric(0), i = numeric(0))
+  for (i in 1:5) {
+     f <- apply(X, 1, ShepFuns[[i]])
+     df <- rbind(df, data.frame(x1 = X$x1, x2 = X$x2, f = f, i = i))
+  }
+  pl <- lattice::wireframe(f ~ x1 * x2 | i, data = df,
+                  outer = TRUE, shade = FALSE, zlab = "",
+                  screen = list(z = 20, x = -30),
+                  strip = lattice::strip.custom(strip.names = c(TRUE),
+                                       strip.levels = c(TRUE)),
+                  main = "", horizontal = TRUE, col = "SpringGreen4")
+  pl
 }
-pl <- wireframe(f ~ x1 * x2 | i, data = df,
-                outer = TRUE, shade = FALSE, zlab = "",
-                screen = list(z = 20, x = -30),
-                strip = strip.custom(strip.names = c(TRUE),
-                                     strip.levels = c(TRUE)),
-                main = "", horizontal = TRUE, col = "SpringGreen4")
-pl
 }
 \references{
 W.I. Thacker, J. Zhang, L.T. Watson, J.B. Birch,

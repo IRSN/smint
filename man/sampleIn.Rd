@@ -2,9 +2,6 @@
 % Please edit documentation in R/GridData.R
 \name{sampleIn}
 \alias{sampleIn}
-\alias{sampleIn,Grid-method}
-\alias{sampleIn,data.frame-method}
-\alias{sampleIn,matrix-method}
 \title{Sample from/in a design object}
 \usage{
 sampleIn(X, size = 1L, atSample = FALSE, ...)

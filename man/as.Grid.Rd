@@ -2,19 +2,38 @@
 % Please edit documentation in R/GridData.R
 \name{as.Grid}
 \alias{as.Grid}
-\title{Coercion of objects to \code{Grid}}
+\title{Coercion to \code{Grid}}
 \usage{
 as.Grid(object, ...)
 }
 \arguments{
-\item{object}{An object to be coerced to \code{Grid}, typically a
-data frame or a matrix.}
+\item{object}{An object to be coerced into a \code{Grid} object.}
 
 \item{...}{Not used yet.}
 }
 \value{
-An object with S4 class \code{"Grid"}.
+Object with S4 class \code{"Grid"}.
 }
 \description{
-Coercion of objects into \code{Grid}.
+Coercion to \code{Grid}.
+}
+\details{
+The dimensions of the \code{Grid} object are matched to the \eqn{d}
+columns of the object given in \code{object}, in the same
+order. Each column is coerced into a factor. Each combination
+of the \eqn{d} different levels must be found exactly one in the
+data frame or matrix, and the the row number of that combination is
+stored in the \code{index} slot of the object.
+}
+\note{
+A numeric object is coerced into a \code{Grid} object
+with dimension \eqn{d =1}.
+}
+\examples{
+set.seed(1234)
+GDnum <- as.Grid(runif(8))
+GDlist <- as.Grid(list("X" = runif(8), "Y" = runif(4)))
+df <- expand.grid(X = runif(6), Y = runif(4))
+GDdf <- as.Grid(df)
+GDmat <- as.Grid(as.matrix(df))
 }

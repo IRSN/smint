@@ -44,11 +44,10 @@ F <- apply(Xout2, 1, branin)
 mat <- cbind(Xout2, fTrue = F, fIntL = GIL, errorLag = F - GIL,
              fIntS = GIS, errorSpline = F - GIS)
 apply(mat[ , c("errorLag", "errorSpline")], 2, function(x) mean(abs(x)))
-\dontrun{
 ## for the users of the "rgl" package only...
-library(rgl)
-persp3d(x = x, y = y, z = f, aspect = c(1, 1, 0.5), col = "lightblue", alpha = 0.8)
-spheres3d(Xout2[ , 1], Xout2[ , 2], GIS, col = "orangered",
+if (requireNamespace("rgl")) { 
+ rgl::persp3d(x = x, y = y, z = f, aspect = c(1, 1, 0.5), col = "lightblue", alpha = 0.8)
+ rgl::spheres3d(Xout2[ , 1], Xout2[ , 2], GIS, col = "orangered",
           radius = 2)
 }
 }

@@ -93,7 +93,6 @@ max(abs(res$yNew - yNew))
 ##=========================================================================
 ## Use SHEPPACK test functions see Thacker et al. section 7 'PERFORMANCE'
 ##=========================================================================
-\dontrun{
    set.seed(1234)
    d <- 3
    k <- 0:4; n0 <- 100 * 2^k; n1 <- 4
@@ -120,7 +119,6 @@ max(abs(res$yNew - yNew))
    axis(side = 1, at = k, labels = n0)
    legend("topright", legend = paste("shepFun", 1:5),
            col = cols, pch = pchs, lwd = 2, pt.lwd = 2, pt.bg = "white")
-}
 }
 \references{
 W.I. Thacker, J. Zhang, L.T. Watson, J.B. Birch,

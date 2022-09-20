@@ -51,7 +51,7 @@ set.seed(123)
 n <- 16; nout <- 360
 x <- sort(runif(n))
 
-##' ## let 'xout' contain n + nout points including nodes 
+## let 'xout' contain n + nout points including nodes 
 xout <- sort(c(x, seq(from =  x[1] + 1e-8, to = x[n] - 1e-8, length.out = nout)))
 res  <- cardinalBasis_natSpline(x, xout = xout)
 

@@ -1,6 +1,22 @@
 ##*****************************************************************************
-## THIS IS NOT TO Roxygenize.
-
+#' @title S4 class for Grid
+#' 
+#' @description This class is intended handle Grid object,
+#'     with support for useful methods like levels, ...
+#'
+#' @slot dim number of dimensions
+#' 
+#' @slot dimNames name of dimensions
+#' 
+#' @slot levels cardinal of discrete values
+#' 
+#' @slot index
+#' 
+#' @author Yaves Deville
+#'
+#' @name Grid-class
+#' @rdname Grid-class
+#' @export
 setClass("Grid",    	
          representation(
             dim = "integer",   
@@ -26,48 +42,50 @@ setClass("Grid",
 )
 
 ##*****************************************************************************
-##' Create a Grid object.
-##' 
-##' @title Create a new \code{Grid} object
-##'
-##' @param levels A list with the levels of the variables. The length
-##' of the list gives the spatial dimension. The \eqn{i}-th element
-##' must be a numeric vector containing the distinct values of the
-##' corresponding variable.
-##'
-##' @param nlevels Integer vector giving the number of levels by
-##' dimension. This formal argument is used only when \code{levels} is
-##' missing. In this case, the nodes for dimension \eqn{i} will be
-##' regularly spaced between \code{0.0} and \code{1.0}.
-##'
-##' @param dimNames If the list \code{levels} does not have names,
-##' then the character vector \code{dimNames} will be used.
-##'
-##' @param index An array with integer values and dimension
-##' corresponding to the spatial dimensions. Each value represent the
-##' number of the corresponding node in a "flat" representation
-##' (data.frame or matrix), and will be used in tasks such as
-##' interpolation.
-##'
-##' @return An object with S4 class \code{"Grid"}. If needed, this
-##' object can be coerced to a data frame or to a matrix by using the
-##' methods \code{as.data.frame} or \code{as.matrix}.
-##'
-##' @author Yves Deville
-##'
-##' @note If \code{index} is not provided, the vectors in the
-##' \code{levels} list can be unsorted, and they will be
-##' sorted. However, when a non-default \code{index} is provided, the
-##' levels must be sorted. This rule is intended to reduce the risk of
-##' error.
-##'
-##' @examples
-##' myGD1 <- Grid(levels = list("X" = c(0, 1), "Y" = c(0.0, 0.5, 1.0)))
-##' ## the same with less effort
-##' myGD2 <- Grid(nlevels = c("X" = 2, "Y" = 3))
-##' nlevels(myGD2)
-##' levels(myGD2)
-##' 
+#' Create a Grid object.
+#' 
+#' @title Create a new \code{Grid} object
+#'
+#' @param levels A list with the levels of the variables. The length
+#' of the list gives the spatial dimension. The \eqn{i}-th element
+#' must be a numeric vector containing the distinct values of the
+#' corresponding variable.
+#'
+#' @param nlevels Integer vector giving the number of levels by
+#' dimension. This formal argument is used only when \code{levels} is
+#' missing. In this case, the nodes for dimension \eqn{i} will be
+#' regularly spaced between \code{0.0} and \code{1.0}.
+#'
+#' @param dimNames If the list \code{levels} does not have names,
+#' then the character vector \code{dimNames} will be used.
+#'
+#' @param index An array with integer values and dimension
+#' corresponding to the spatial dimensions. Each value represent the
+#' number of the corresponding node in a "flat" representation
+#' (data.frame or matrix), and will be used in tasks such as
+#' interpolation.
+#' 
+#' @export
+#'
+#' @return An object with S4 class \code{"Grid"}. If needed, this
+#' object can be coerced to a data frame or to a matrix by using the
+#' methods \code{as.data.frame} or \code{as.matrix}.
+#'
+#' @author Yves Deville
+#'
+#' @note If \code{index} is not provided, the vectors in the
+#' \code{levels} list can be unsorted, and they will be
+#' sorted. However, when a non-default \code{index} is provided, the
+#' levels must be sorted. This rule is intended to reduce the risk of
+#' error.
+#'
+#' @examples
+#' myGD1 <- Grid(levels = list("X" = c(0, 1), "Y" = c(0.0, 0.5, 1.0)))
+#' ## the same with less effort
+#' myGD2 <- Grid(nlevels = c("X" = 2, "Y" = 3))
+#' nlevels(myGD2)
+#' levels(myGD2)
+#' 
 Grid <- function(levels,
                      nlevels = NULL,
                      dimNames = NULL,
@@ -125,45 +143,50 @@ Grid <- function(levels,
 }
 
 ##*****************************************************************************
-##' Random drawing of a \code{Grid} object
-##'
-##' The nodes are drawn by first choosing their number for each
-##' spatial dimension using a Poisson distribution, and then by
-##' drawing a sample of the uniform distribution with the suitable
-##' size.
-##' @title Random drawing of a \code{Grid} object
-##'
-##' @param dim The spatial dimension.
-##'
-##' @param nxMin Minimum number of nodes. Integer vector of length 1
-##' or \code{dim}.example(Grid).
-##'
-##' @param nxE Expected number of nodes. Numeric vector of length 1
-##' or \code{dim}.
-##'
-##' @param nlevels Integer vector giving the number of levels for each
-##' spatial dimension.
-##'
-##' @param dimNames Names of the spatial dimensions.
-##'
-##' @return An object with S4 class \code{"Grid"}.
-##'
-##' @author Yves Deville
-##'
-##' @note This function is \emph{not} not for drawing random design
-##' points from within the object.
-##'
-##' @seealso \code{\link{Grid-class}}.
-##'
-##' @examples
-##' set.seed(1234)
-##' ## specify dim: number of levels are random!
-##' GD <- randGrid(dim = 4)
-##' plot(GD)
-##' ## specify number of levels (hence dim)
-##' GD2 <- randGrid(nlevels = c(2, 3, 4))
-##' plot(GD2)
-##' 
+#' Random drawing of a \code{Grid} object
+#'
+#' The nodes are drawn by first choosing their number for each
+#' spatial dimension using a Poisson distribution, and then by
+#' drawing a sample of the uniform distribution with the suitable
+#' size.
+#' @title Random drawing of a \code{Grid} object
+#'
+#' @param dim The spatial dimension.
+#'
+#' @param nxMin Minimum number of nodes. Integer vector of length 1
+#' or \code{dim}.example(Grid).
+#'
+#' @param nxE Expected number of nodes. Numeric vector of length 1
+#' or \code{dim}.
+#'
+#' @param nlevels Integer vector giving the number of levels for each
+#' spatial dimension.
+#'
+#' @param dimNames Names of the spatial dimensions.
+#'
+#' @export
+#' 
+#' @importFrom stats runif
+#' @importFrom stats rpois
+#' 
+#' @return An object with S4 class \code{"Grid"}.
+#'
+#' @author Yves Deville
+#'
+#' @note This function is \emph{not} not for drawing random design
+#' points from within the object.
+#'
+#' @seealso \code{\link{Grid-class}}.
+#'
+#' @examples
+#' set.seed(1234)
+#' ## specify dim: number of levels are random!
+#' GD <- randGrid(dim = 4)
+#' plot(GD)
+#' ## specify number of levels (hence dim)
+#' GD2 <- randGrid(nlevels = c(2, 3, 4))
+#' plot(GD2)
+#' 
 randGrid <- function(dim = 1L + rpois(1L, lambda = 3),
                       nxMin = 1L, nxE = 4L,
                       nlevels, dimNames) {
@@ -207,14 +230,36 @@ randGrid <- function(dim = 1L + rpois(1L, lambda = 3),
 ## Basic extraction methods
 ##*****************************************************************************
 
+#' @title Get dimension of given Grid
+#' @author Yves Deville
+#' @param x Grid object
+#' @return Number of dimensions/columns of the Grid object.
+#' @method dim Grid
+#' @exportMethod dim
+#' @aliases dim,Grid-method
 setMethod("dim", 
           signature = signature(x = "Grid"),
           definition = function(x){ x@dim })
 
+#' @title Get dimension names of given Grid
+#' @author Yves Deville
+#' @param x Grid object
+#' @return Names of dimensions/columns of the Grid object.
+#' @method dimnames Grid
+#' @exportMethod dimnames
+#' @aliases dimnames,Grid-method
 setMethod("dimnames", 
           signature = signature(x = "Grid"),
           definition = function(x){ x@dimNames })
 
+#' @title Set dimension names of Grid
+#' @author Yves Deville
+#' @param x Grid object
+#' @param value New dimension names of Grid
+#' @return Modified Grid object
+#' @method dimnames Grid
+#' @exportMethod dimnames<-
+#' @aliases dimnames<-,Grid-method
 setMethod("dimnames<-", 
           signature = signature(x = "Grid"),
           definition = function(x, value){
@@ -230,10 +275,24 @@ setMethod("dimnames<-",
           }
           )
 
+#' @title Get levels of Grid
+#' @author Yves Deville
+#' @param x Grid object
+#' @return Levels of the Grid object.
+#' @method levels Grid
+#' @exportMethod levels
+#' @aliases levels,Grid-method
 setMethod("levels", 
           signature = signature(x = "Grid"),
           definition = function(x){ x@levels })
 
+#' @title Get number of levels of Grid
+#' @author Yves Deville
+#' @param x Grid object
+#' @return Number of levels of the Grid object.
+#' @method nlevels Grid
+#' @exportMethod nlevels
+#' @aliases nlevels,Grid-method
 setMethod("nlevels", 
           signature = signature(x = "Grid"),
           definition = function(x){
@@ -248,6 +307,17 @@ setMethod("nlevels",
 ##*****************************************************************************
 ## Coercion S4 methods
 ##*****************************************************************************
+
+#' @title Coerce Grid in data.frame
+#' @author Yves Deville
+#' @param x Grid object
+#' @param jitter if TRUE, add a small white noise to data. Defaults to FALSE.
+#' @param ... Not used.
+#' @return Coerced data.frame object
+#' @method as.data.frame Grid
+#' @exportMethod as.data.frame
+#' @importFrom stats rnorm
+#' @aliases as.data.frame,Grid-method
 setMethod("as.data.frame", 
           signature = signature(x = "Grid"),
           definition = function(x, jitter = FALSE, ...){
@@ -270,6 +340,15 @@ setMethod("as.data.frame",
          }
 )
 
+#' @title Coerce Grid in matrix
+#' @author Yves Deville
+#' @param x Grid object
+#' @param jitter if TRUE, add a small white noise to data. Defaults to FALSE.
+#' @param ... Not used.
+#' @return Coerced matrix object
+#' @method as.matrix Grid
+#' @exportMethod as.matrix
+#' @aliases as.matrix,Grid-method
 setMethod("as.matrix", 
           signature = signature(x = "Grid"),
           definition = function(x, jitter = FALSE, ...){
@@ -279,13 +358,30 @@ setMethod("as.matrix",
 ##*****************************************************************************
 ## Classical methods
 ##*****************************************************************************          
+#' @title Get length of Grid
+#' @author Yves Deville
+#' @param x Grid object
+#' @return Length of the Grid object.
+#' @method length Grid
+#' @exportMethod length
+#' @aliases length,Grid-method
 setMethod("length", 
           signature = signature(x = "Grid"),
           definition = function(x){
               length(x@index)
           })
 
-
+#' @title Plot Grid as pairs
+#' @author Yves Deville
+#' @param x Grid object
+#' @param y optional data to add in plot alongside x (should have same length)
+#' @param jitter if TRUE, add a small white noise to data. Defaults to FALSE.
+#' @param ... Optional arguments passed to 'pairs()'
+#' @return 'pairs' object
+#' @method plot Grid
+#' @importFrom graphics pairs
+#' @exportMethod plot
+#' @aliases plot,Grid-method
 setMethod("plot", 
           signature = signature(x = "Grid"),
           definition = function(x, y, jitter = FALSE, ...){
@@ -296,6 +392,13 @@ setMethod("plot",
               pairs(df, ...)
           })
 
+#' @title Print Grid object informations
+#' @author Yves Deville
+#' @param object Grid object
+#' @return Nothing.
+#' @method show Grid
+#' @exportMethod show
+#' @aliases show,Grid-method
 setMethod("show", 
           signature = signature(object = "Grid"),
           definition = function(object){
@@ -312,10 +415,18 @@ setMethod("show",
           })
 
 ##*****************************************************************************
-## Permutation method
-## The generalised transpose changes the order of the factors keeping the
-## order of the observations. The transformation to a data frame is
-## not efficient in term of computations, but is easily understood.
+#' @title Permutation method
+#' @description The generalised transpose changes the order of the factors 
+#'    keeping the order of the observations. The transformation to a data frame is
+#'    not efficient in term of computations, but is easily understood.
+#' @author Yves Deville
+#' @param a Grid object
+#' @param perm new order indexes
+#' @param ... Not used.
+#' @return Permuted Grid.
+#' @method aperm Grid
+#' @exportMethod aperm
+#' @aliases aperm,Grid-method
 ##*****************************************************************************          
 ## setMethod("aperm",
 ##           signature = signature(a = "Grid"),
@@ -346,56 +457,75 @@ setMethod("aperm",
 ##*****************************************************************************
 ## Coercion S3 methods
 ##*****************************************************************************
-##' Coercion of objects into \code{Grid}.
-##'
-##' @title  Coercion of objects to \code{Grid}
-##'
-##' @param object An object to be coerced to \code{Grid}, typically a
-##' data frame or a matrix.
-##'
-##' @param ... Not used yet. 
-##'
-##' @return An object with S4 class \code{"Grid"}.
+#' Coercion to \code{Grid}.
+#'
+#' The dimensions of the \code{Grid} object are matched to the \eqn{d}
+#' columns of the object given in \code{object}, in the same
+#' order. Each column is coerced into a factor. Each combination
+#' of the \eqn{d} different levels must be found exactly one in the
+#' data frame or matrix, and the the row number of that combination is
+#' stored in the \code{index} slot of the object.
+#'
+#' @title Coercion to \code{Grid}
+#'
+#' @param object An object to be coerced into a \code{Grid} object.
+#'
+#' @param ... Not used yet.
+#'
+#' @export
+#' 
+#' @return Object with S4 class \code{"Grid"}.
+#' 
+#' @note A numeric object is coerced into a \code{Grid} object
+#' with dimension \eqn{d =1}.
+#'
+#' @examples
+#' set.seed(1234)
+#' GDnum <- as.Grid(runif(8))
+#' GDlist <- as.Grid(list("X" = runif(8), "Y" = runif(4)))
+#' df <- expand.grid(X = runif(6), Y = runif(4))
+#' GDdf <- as.Grid(df)
+#' GDmat <- as.Grid(as.matrix(df))
 as.Grid <- function(object, ...) {
    UseMethod("as.Grid")
 }
 
-##' Coercion to \code{Grid}.
-##'
-##' The dimensions of the \code{Grid} object are matched to the \eqn{d}
-##' columns of the object given in \code{object}, in the same
-##' order. Each column is coerced into a factor. Each combination
-##' of the \eqn{d} different levels must be found exactly one in the
-##' data frame or matrix, and the the row number of that combination is
-##' stored in the \code{index} slot of the object.
-##'
-##' @title Coercion to \code{Grid}
-##'
-##' @aliases as.Grid.numeric as.Grid.matrix as.Grid.list
-##'
-##' @method as.Grid default
-##'
-##' @param object An object to be coerced into a \code{Grid} object.
-##'
-##' @param ... Not used yet.
-##'
-##' @return Object with S4 class \code{"Grid"}.
-##'
-##' @note A numeric object is coerced into a \code{Grid} object
-##' with dimension \eqn{d =1}.
-##'
-##' @examples
-##' set.seed(1234)
-##' GDnum <- as.Grid(runif(8))
-##' GDlist <- as.Grid(list("X" = runif(8), "Y" = runif(4)))
-##' df <- expand.grid(X = runif(6), Y = runif(4))
-##' GDdf <- as.Grid(df)
-##' GDmat <- as.Grid(as.matrix(df))
-##'
+#' @title Coercion to \code{Grid}
+#' @method as.Grid default
+#' @param object An object to be coerced into a \code{Grid} object.
+#' @param ... Not used yet.
+#' @return Object with S4 class \code{"Grid"}.
+#' @export
 as.Grid.default <- function(object, ...) {
   as.Grid(as.data.frame(object), ...)
 }
 
+#' @title Coercion to \code{Grid}
+#' @method as.Grid matrix
+#' @param object An object to be coerced into a \code{Grid} object.
+#' @param ... Not used yet.
+#' @return Object with S4 class \code{"Grid"}.
+#' @export
+as.Grid.matrix <- function(object, ...) {
+  as.Grid(as.data.frame(object), ...)
+}
+
+#' @title Coercion to \code{Grid}
+#' @method as.Grid numeric
+#' @param object An object to be coerced into a \code{Grid} object.
+#' @param ... Not used yet.
+#' @return Object with S4 class \code{"Grid"}.
+#' @export
+as.Grid.numeric <- function(object, ...) {
+  as.Grid(as.data.frame(object), ...)
+}
+
+#' @title Coercion to \code{Grid}
+#' @method as.Grid data.frame
+#' @param object An object to be coerced into a \code{Grid} object.
+#' @param ... Not used yet.
+#' @return Object with S4 class \code{"Grid"}.
+#' @export
 as.Grid.data.frame <- function(object, ...) {
    
    X <- lapply(object, as.factor)
@@ -420,6 +550,12 @@ as.Grid.data.frame <- function(object, ...) {
    
 }
 
+#' @title Coercion to \code{Grid}
+#' @method as.Grid list
+#' @param object An object to be coerced into a \code{Grid} object.
+#' @param ... Not used yet.
+#' @return Object with S4 class \code{"Grid"}.
+#' @export
 as.Grid.list <- function(object, ...) {
   dim <- length(object)
   if (is.null(names(object))) {
@@ -438,34 +574,36 @@ as.Grid.list <- function(object, ...) {
 }
   
 ##*****************************************************************************
-##' Apply a function to a \code{Grid} object.
-##'
-##' The function is applied to each vector combination of the levels by first
-##' using the \code{as.matrix} coercion.
-##'
-##' @title Apply a function to a \code{Grid} object.
-##' 
-##' @param object An object with S4 class \code{"Grid"}
-##'
-##' @param fun The function to be applied.
-##'
-##' @param ... Further arguments to be passed to \code{fun}.
-##'
-##' @return A vector of values.
-##'
-##' @seealso \code{\link{array_Grid}} to reshape the result as an array.
-##' 
-##' @note The result values are given in the order specified by the
-##' \code{Grid} object.
-##' 
-##' @examples
-##' myGD <- Grid(levels = list("X" = c(0, 1),
-##'                            "Y" = c(0.0, 0.5, 1.0),
-##'                            "Z" = c(0.0, 0.2, 0.4, 1.0)))
-##' ## gaussian function
-##' apply_Grid(myGD, fun = function(x) exp(-x[1]^2 - 3 * x[2]^2 - 2 * x[3]^2))
-##' 
-##' 
+#' Apply a function to a \code{Grid} object.
+#'
+#' The function is applied to each vector combination of the levels by first
+#' using the \code{as.matrix} coercion.
+#'
+#' @title Apply a function to a \code{Grid} object.
+#' 
+#' @param object An object with S4 class \code{"Grid"}
+#'
+#' @param fun The function to be applied.
+#'
+#' @param ... Further arguments to be passed to \code{fun}.
+#' 
+#' @export
+#'
+#' @return A vector of values.
+#'
+#' @seealso \code{\link{array_Grid}} to reshape the result as an array.
+#' 
+#' @note The result values are given in the order specified by the
+#' \code{Grid} object.
+#' 
+#' @examples
+#' myGD <- Grid(levels = list("X" = c(0, 1),
+#'                            "Y" = c(0.0, 0.5, 1.0),
+#'                            "Z" = c(0.0, 0.2, 0.4, 1.0)))
+#' ## gaussian function
+#' apply_Grid(myGD, fun = function(x) exp(-x[1]^2 - 3 * x[2]^2 - 2 * x[3]^2))
+#' 
+#' 
 apply_Grid <- function(object, fun, ...) {
     
   X <- as.matrix(object)
@@ -489,56 +627,54 @@ apply_Grid <- function(object, fun, ...) {
 }
 
 ##*****************************************************************************
-##' Sample from/in a design object.
-##'
-##' From the object, \code{size} 'new' design points are sampled or
-##' drawn. When \code{atSample} is \code{FALSE}, the range of each
-##' column is computed or extracted from the object \code{x}, and then
-##' independent drawings from the corresponding uniform distributions
-##' are used.
-##' 
-##' @title Sample from/in a design object
-##' 
-##' @aliases sampleIn sampleIn,Grid-method sampleIn,data.frame-method
-##' sampleIn,matrix-method
-##' 
-##'
-##' @usage sampleIn(X, size = 1L, atSample = FALSE, ...)
-##' 
-##' @param X The object, typically a design matrix with class
-##' \code{matrix} or an object with class \code{"Grid"}.
-##'
-##' @param size Number of sample points.
-##'
-##' @param atSample Logical. If \code{TRUE} the new sample points are
-##' obtained using \code{sample}
-##'
-##' @param ... Other arguments to be passed to the \code{sample} function
-##' when \code{atSample} is \code{TRUE}, typically \code{replace = TRUE}
-##' is needed when the object \code{x} contains less than the target
-##' number given in \code{size}.
-##'
-##' @return A matrix with \code{size} rows. When \code{atSample} is
-##' \code{TRUE}, the matrix has an attribute named \code{index} which
-##' gives the position of the sampled items in the original grid.
-##'
-##' @note When \code{x} is of class \code{"Grid"}, it may be the case
-##' that the drawings with \code{atSample = FALSE} have no meaning since some
-##' of the variables may be discrete variables and not continuous ones. 
-##' 
-##' @seealso The \code{\link{sample}} function.
-##'
-##' @examples
-##' g <- Grid(levels = list("Temp" = c(400, 450, 500),
-##'                         "Bore" = c(0, 600, 1200, 1800, 2400)))
-##' X1 <- sampleIn(g, size = 4)
-##' X2 <- sampleIn(g, size = 4, atSample = TRUE)
-##' 
-##' ## this must be zero
-##' sum(abs(as.matrix(g)[attr(X2, "index"), ] - X2))
-##'
-##'
-##'
+#' Sample from/in a design object.
+#'
+#' From the object, \code{size} 'new' design points are sampled or
+#' drawn. When \code{atSample} is \code{FALSE}, the range of each
+#' column is computed or extracted from the object \code{x}, and then
+#' independent drawings from the corresponding uniform distributions
+#' are used.
+#' 
+#' @title Sample from/in a design object 
+#'
+#' @usage sampleIn(X, size = 1L, atSample = FALSE, ...)
+#' 
+#' @param X The object, typically a design matrix with class
+#' \code{matrix} or an object with class \code{"Grid"}.
+#'
+#' @param size Number of sample points.
+#'
+#' @param atSample Logical. If \code{TRUE} the new sample points are
+#' obtained using \code{sample}
+#'
+#' @param ... Other arguments to be passed to the \code{sample} function
+#' when \code{atSample} is \code{TRUE}, typically \code{replace = TRUE}
+#' is needed when the object \code{x} contains less than the target
+#' number given in \code{size}.
+#' 
+#' @export
+#'
+#' @return A matrix with \code{size} rows. When \code{atSample} is
+#' \code{TRUE}, the matrix has an attribute named \code{index} which
+#' gives the position of the sampled items in the original grid.
+#'
+#' @note When \code{x} is of class \code{"Grid"}, it may be the case
+#' that the drawings with \code{atSample = FALSE} have no meaning since some
+#' of the variables may be discrete variables and not continuous ones. 
+#' 
+#' @seealso The \code{\link{sample}} function.
+#'
+#' @examples
+#' g <- Grid(levels = list("Temp" = c(400, 450, 500),
+#'                         "Bore" = c(0, 600, 1200, 1800, 2400)))
+#' X1 <- sampleIn(g, size = 4)
+#' X2 <- sampleIn(g, size = 4, atSample = TRUE)
+#' 
+#' ## this must be zero
+#' sum(abs(as.matrix(g)[attr(X2, "index"), ] - X2))
+#'
+#'
+#'
 ##*****************************************************************************
 ## Sample
 ##*****************************************************************************
@@ -547,6 +683,14 @@ if (!isGeneric("sampleIn")) {
     setGeneric("sampleIn", sampleIn)
 }
 
+#' @title Sample in matrix
+#' @param X design matrix
+#' @param size Number of sample points.
+#' @param atSample should new sample points obtained using \code{sample}
+#' @param ... optional args passed to 'sample()'
+#' @method sampleIn matrix
+#' @exportMethod sampleIn
+#' @importFrom stats runif
 setMethod("sampleIn", 
           signature = signature(X = "matrix"),
           definition = function(X, size = 1L, atSample = FALSE, ...) {
@@ -566,6 +710,14 @@ setMethod("sampleIn",
           }
       )
 
+#' @title Sample in data.frame
+#' @param X design data.frame
+#' @param size Number of sample points.
+#' @param atSample should new sample points obtained using \code{sample}
+#' @param ... optional args passed to 'sample()'
+#' @method sampleIn data.frame
+#' @exportMethod sampleIn
+#' @importFrom stats runif
 setMethod("sampleIn", 
           signature = signature(X = "data.frame"),
           definition = function(X, size = 1L, atSample = FALSE, ...) {
@@ -573,6 +725,14 @@ setMethod("sampleIn",
           }
           )
 
+#' @title Sample in Grid
+#' @param X design Grid
+#' @param size Number of sample points.
+#' @param atSample should new sample points obtained using \code{sample}
+#' @param ... optional args passed to 'sample()'
+#' @method sampleIn Grid
+#' @exportMethod sampleIn
+#' @importFrom stats runif
 setMethod("sampleIn", 
           signature = signature(X = "Grid"),
           definition = function(X, size = 1L, atSample = FALSE, ...) {
@@ -594,25 +754,29 @@ setMethod("sampleIn",
       )
 
 ##=======================================================================
-##' Drop the dimensions with a unique level in a \code{Grid} object.
-##'
-##' @title Drop the dimensions with a unique level in a Grid
-##' object
-##' 
-##' @param x An object with class \code{Grid} 
-##'
-##' @param ... Not used yet.
-##'
-##' @return An object of class \code{Grid} but with the fixed
-##' dimensions removed.
-##'
-##' @seealso The usual \code{\link{drop}} function for arrays.
-##' 
-##' @examples
-##' myGD <- Grid(nlevels = c(3, 1, 4, 1, 5))
-##' myGD
-##' plot(myGD)
-##' myGD1 <- drop_Grid(myGD)
+#' Drop the dimensions with a unique level in a \code{Grid} object.
+#'
+#' @title Drop the dimensions with a unique level in a Grid
+#' object
+#' 
+#' @param x An object with class \code{Grid} 
+#'
+#' @param ... Not used yet.
+#' 
+#' @export
+#' 
+#' @importFrom methods new
+#'
+#' @return An object of class \code{Grid} but with the fixed
+#' dimensions removed.
+#'
+#' @seealso The usual \code{\link{drop}} function for arrays.
+#' 
+#' @examples
+#' myGD <- Grid(nlevels = c(3, 1, 4, 1, 5))
+#' myGD
+#' plot(myGD)
+#' myGD1 <- drop_Grid(myGD)
 ##  plot(myGD1)
 drop_Grid <- function(x, ...) {
     nl <- nlevels(x) 
@@ -643,57 +807,59 @@ drop_Grid <- function(x, ...) {
 }
 
 ##======================================================================
-##' Find boundary points in a \code{Grid} object.
-##'
-##' When \code{type} is \code{"data.frame"}, the returned object is a
-##' data frame containing only the boundary points. When \code{type}
-##' is \code{"array"} the result is a logical array with its elements
-##' in correspondence with the \code{index} slot of the
-##' object. Finally, when \code{type} is \code{"index"}, the result is
-##' an integer vector giving the indices of the boundary points in the
-##' order of the nodes defined by the object. This order is the one
-##' used by the \code{as.data.frame} coercion.
-##' 
-##' @title Find boundary points in a \code{Grid} object
-##' 
-##' @param x An object with class \code{"Grid"}.
-##'
-##' @param type The wanted type of result.
-##'
-##' @return An object describing the boundary points. See
-##' \bold{Details}.
-##'
-##' @note Remind that when using the \code{plot} method for a
-##' \code{Grid} object, some nodes are generally hidden because
-##' several points have the same projection when they are shown in a
-##' two-dimensional scatterplot.
-##'
-##' When one or more of the levels has length \eqn{\leq 2}{<= 2}, all
-##' points of the grid are boundary points!
-##'
-##' @examples
-##' ## define a Grid object
-##' myGD <- Grid(nlevels = c(3, 4))
-##' bd <- boundary_Grid(myGD, type = "index")
-##'
-##' ## use a different color for boundary points
-##' cols <- rep("black", length(myGD))
-##' cols[bd] <- "red"
-##' plot(myGD, col = cols, pch = 16, cex = 2, main = "Boundary points")
-##'
-##' ## repeat this after a generalised transposition
-##' myGD2 <- aperm(myGD, perm = c(2, 1))
-##' bd2 <- boundary_Grid(myGD2, type = "index")
-##' cols2 <- rep("black", length(myGD2))
-##' cols2[bd2] <- "red"
-##' plot(myGD2, col = cols2, pch = 16, cex = 2, main = "Boundary points")
-##'
-##' ## 3-dimensional
-##' myGD3 <- Grid(nlevels = c("x" = 3, "y"= 4, "z" = 6))
-##' bd3 <- boundary_Grid(myGD3, type = "index")
-##' cols3 <- rep("black", length(myGD3))
-##' cols3[bd3] <- "red"
-##' plot(myGD3, jitter = TRUE, col = cols3, pch = 16, cex = 2, main = "Boundary points")
+#' Find boundary points in a \code{Grid} object.
+#'
+#' When \code{type} is \code{"data.frame"}, the returned object is a
+#' data frame containing only the boundary points. When \code{type}
+#' is \code{"array"} the result is a logical array with its elements
+#' in correspondence with the \code{index} slot of the
+#' object. Finally, when \code{type} is \code{"index"}, the result is
+#' an integer vector giving the indices of the boundary points in the
+#' order of the nodes defined by the object. This order is the one
+#' used by the \code{as.data.frame} coercion.
+#' 
+#' @title Find boundary points in a \code{Grid} object
+#' 
+#' @param x An object with class \code{"Grid"}.
+#'
+#' @param type The wanted type of result.
+#' 
+#' @export
+#'
+#' @return An object describing the boundary points. See
+#' \bold{Details}.
+#'
+#' @note Remind that when using the \code{plot} method for a
+#' \code{Grid} object, some nodes are generally hidden because
+#' several points have the same projection when they are shown in a
+#' two-dimensional scatterplot.
+#'
+#' When one or more of the levels has length \eqn{\leq 2}{<= 2}, all
+#' points of the grid are boundary points!
+#'
+#' @examples
+#' ## define a Grid object
+#' myGD <- Grid(nlevels = c(3, 4))
+#' bd <- boundary_Grid(myGD, type = "index")
+#'
+#' ## use a different color for boundary points
+#' cols <- rep("black", length(myGD))
+#' cols[bd] <- "red"
+#' plot(myGD, col = cols, pch = 16, cex = 2, main = "Boundary points")
+#'
+#' ## repeat this after a generalised transposition
+#' myGD2 <- aperm(myGD, perm = c(2, 1))
+#' bd2 <- boundary_Grid(myGD2, type = "index")
+#' cols2 <- rep("black", length(myGD2))
+#' cols2[bd2] <- "red"
+#' plot(myGD2, col = cols2, pch = 16, cex = 2, main = "Boundary points")
+#'
+#' ## 3-dimensional
+#' myGD3 <- Grid(nlevels = c("x" = 3, "y"= 4, "z" = 6))
+#' bd3 <- boundary_Grid(myGD3, type = "index")
+#' cols3 <- rep("black", length(myGD3))
+#' cols3[bd3] <- "red"
+#' plot(myGD3, jitter = TRUE, col = cols3, pch = 16, cex = 2, main = "Boundary points")
 boundary_Grid <- function(x, type = c("data.frame", "array", "index")) {
     
     result <- match.arg(type)
@@ -723,47 +889,51 @@ boundary_Grid <- function(x, type = c("data.frame", "array", "index")) {
 }
 
 ##======================================================================
-##' Subgrid by selection of levels in one dimension.
-##'
-##' @title Subgrid by selection of levels in one dimension.
-##'
-##' @param X An object with class \code{"Grid"}.
-##'
-##' @param subset An expression concerning \emph{one} of the dimension of \code{X}.
-##' This can be compared to an expression in the \code{subset} method.
-##' 
-##' @param type The wanted type of result. When \code{type} is
-##' \code{"index"}, the returned result is an integer vector
-##' containing the indices of the subgrid nodes in the original
-##' grid. When \code{type} is \code{"Grid"} the result is the subgrid
-##' as an object of this class. Finally when \code{type} is
-##' \code{"both"} a list is returned containing the two previous types
-##' of result under the names \code{index} and \code{Grid}.
-##' 
-##' @param drop Logical. If \code{TRUE} and if only one level is selected
-##' with \code{subset} then the corresponding dimension of the (flat)
-##' \code{Grid} result will be dropped.
-##'
-##' @return A vector of integer indices, a \code{Grid} object or a list
-##' embedding these two elements, depending on the value of \code{type}.
-##'
-##' @seealso The \code{\link{subset}} method.
-##'
-##' @note The new \code{Grid} returned (if any) uses consecutive
-##' numbers for the nodes between \eqn{1} and the number of new nodes. So it
-##' no longer keeps trace of the nodes position in \code{X}.  However
-##' the surviving nodes are kept in the order that they had in
-##' \code{X}.
-##'
-##' When a response vector or matrix say \code{Y} is related to the
-##' original grid \code{X}, the index vector returned by
-##' \code{subgrid} can be used to select the corresponding responses.
-##' 
-##' @examples
-##' myGD <- Grid(levels = list("Temp" = c(250, 260, 280, 290, 300),
-##'                            "Press" = c(3, 4, 6, 10)))
-##' myGD2 <- subset_Grid(myGD, subset = Temp > 280) 
-##' 
+#' Subgrid by selection of levels in one dimension.
+#'
+#' @title Subgrid by selection of levels in one dimension.
+#'
+#' @param X An object with class \code{"Grid"}.
+#'
+#' @param subset An expression concerning \emph{one} of the dimension of \code{X}.
+#' This can be compared to an expression in the \code{subset} method.
+#' 
+#' @param type The wanted type of result. When \code{type} is
+#' \code{"index"}, the returned result is an integer vector
+#' containing the indices of the subgrid nodes in the original
+#' grid. When \code{type} is \code{"Grid"} the result is the subgrid
+#' as an object of this class. Finally when \code{type} is
+#' \code{"both"} a list is returned containing the two previous types
+#' of result under the names \code{index} and \code{Grid}.
+#' 
+#' @param drop Logical. If \code{TRUE} and if only one level is selected
+#' with \code{subset} then the corresponding dimension of the (flat)
+#' \code{Grid} result will be dropped.
+#' 
+#' @export
+#' 
+#' @importFrom methods is
+#'
+#' @return A vector of integer indices, a \code{Grid} object or a list
+#' embedding these two elements, depending on the value of \code{type}.
+#'
+#' @seealso The \code{\link{subset}} method.
+#'
+#' @note The new \code{Grid} returned (if any) uses consecutive
+#' numbers for the nodes between \eqn{1} and the number of new nodes. So it
+#' no longer keeps trace of the nodes position in \code{X}.  However
+#' the surviving nodes are kept in the order that they had in
+#' \code{X}.
+#'
+#' When a response vector or matrix say \code{Y} is related to the
+#' original grid \code{X}, the index vector returned by
+#' \code{subgrid} can be used to select the corresponding responses.
+#' 
+#' @examples
+#' myGD <- Grid(levels = list("Temp" = c(250, 260, 280, 290, 300),
+#'                            "Press" = c(3, 4, 6, 10)))
+#' myGD2 <- subset_Grid(myGD, subset = Temp > 280) 
+#' 
 subset_Grid <- function(X, subset,
                     type = c("index", "Grid", "both"), drop = TRUE) {
   

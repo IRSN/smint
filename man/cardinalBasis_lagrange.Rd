@@ -44,7 +44,7 @@ set.seed(123)
 n <- 16; nout <- 300
 x <- sort(runif(n))
 
-##' ## let 'xout' contain n + nout points including nodes 
+## let 'xout' contain n + nout points including nodes 
 xout <- sort(c(x, runif(nout, min = x[1], max = x[n])))
 res  <- cardinalBasis_lagrange(x, xout = xout)
 
