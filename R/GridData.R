@@ -12,7 +12,7 @@
 #' 
 #' @slot index
 #' 
-#' @author Yaves Deville
+#' @author Yves Deville
 #'
 #' @name Grid-class
 #' @rdname Grid-class
@@ -413,6 +413,10 @@ setMethod("show",
              cat(sprintf("  o number of nodes : %s\n", nn))
              cat(sprintf("  o total number of nodes : %d\n", prod(nx)))
           })
+
+show <- function(object, ...) {
+   UseMethod("show")
+}
 
 ##*****************************************************************************
 #' @title Permutation method

@@ -21,5 +21,5 @@ This class is intended handle Grid object,
 }}
 
 \author{
-Yaves Deville
+Yves Deville
 }
