@@ -2,23 +2,27 @@
 % Please edit documentation in R/GridData.R
 \name{sampleIn}
 \alias{sampleIn}
+\alias{sampleIn,matrix-method}
+\alias{sampleIn,data.frame-method}
+\alias{sampleIn,Grid-method}
 \title{Sample from/in a design object}
 \usage{
 sampleIn(X, size = 1L, atSample = FALSE, ...)
+
+\S4method{sampleIn}{matrix}(X, size = 1L, atSample = FALSE, ...)
+
+\S4method{sampleIn}{data.frame}(X, size = 1L, atSample = FALSE, ...)
+
+\S4method{sampleIn}{Grid}(X, size = 1L, atSample = FALSE, ...)
 }
 \arguments{
-\item{X}{The object, typically a design matrix with class
-\code{matrix} or an object with class \code{"Grid"}.}
+\item{X}{design Grid}
 
 \item{size}{Number of sample points.}
 
-\item{atSample}{Logical. If \code{TRUE} the new sample points are
-obtained using \code{sample}}
+\item{atSample}{should new sample points obtained using \code{sample}}
 
-\item{...}{Other arguments to be passed to the \code{sample} function
-when \code{atSample} is \code{TRUE}, typically \code{replace = TRUE}
-is needed when the object \code{x} contains less than the target
-number given in \code{size}.}
+\item{...}{optional args passed to 'sample()'}
 }
 \value{
 A matrix with \code{size} rows. When \code{atSample} is

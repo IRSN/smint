@@ -301,8 +301,7 @@ gridInt <- function(X, Y, Xout,
                      xLevels,
                      Xout,
                      interpFun,
-                     rho,
-                     PACKAGE = "smint")
+                     rho)
         
         return(res[1L:nOut])
 

@@ -217,8 +217,7 @@ gridIntCB <- function(X, Y, Xout,
                xLevels,
                Xout,
                interpCB,
-               rho,
-               PACKAGE = "smint")
+               rho)
   
   res[1L:nOut]
   

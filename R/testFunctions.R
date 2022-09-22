@@ -75,9 +75,11 @@ branin <- function (x) {
 #' 
 #' @aliases ShepFun2 ShepFun3 ShepFun4 ShepFun5 ShepFuns
 #' 
-#' @title Test functions for/from SHEPPACK
+#' @title Test function ShepFun1 from SHEPPACK
 #'
 #' @param x A numeric vector with arbitrary length.
+#' 
+#' @rdname ShepFuns
 #' 
 #' @export
 #'
@@ -127,39 +129,47 @@ ShepFun1 <- function(x) {
         else return(2 - f)
 }
 
+#' @title Test function ShepFun2 from SHEPPACK
+#' 
 #' @param x A numeric vector with arbitrary length.
 #' 
+#' @rdname ShepFuns
+#' 
 #' @export
-#'
-#' @return Function's value.
 ShepFun2 <- function(x) {
     d <- length(x)
     f <- 1 - 2 * sum(abs(x - 0.5)) / d
 }
 
+#' @title Test function ShepFun3 from SHEPPACK
+#' 
 #' @param x A numeric vector with arbitrary length.
 #' 
+#' @rdname ShepFuns
+#' 
 #' @export
-#'
-#' @return Function's value.
 ShepFun3 <- function(x) {
     f <- 1 - 2 * max(abs(x - 0.5)) 
 }
 
+#' @title Test function ShepFun4 from SHEPPACK
+#' 
 #' @param x A numeric vector with arbitrary length.
 #' 
+#' @rdname ShepFuns
+#' 
 #' @export
-#'
-#' @return Function's value.
 ShepFun4 <- function(x) {
     prod(ifelse(x <= 0.5, 2*x, 2 * (1-x)))
 }
 
+#' @title Test function ShepFun5 from SHEPPACK
+#' 
 #' @param x A numeric vector with arbitrary length.
 #' 
+#' @rdname ShepFuns
+#' 
 #' @export
-#'
-#' @return Function's value.
 ShepFun5 <- function(x) {
     d <- length(x) 
     xf <- abs(x - 0.5)

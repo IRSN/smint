@@ -95,8 +95,7 @@ cardinalBasis_ceschino <- function(x, xout, cubic = TRUE, deriv = 0) {
                         as.double(xout[i]),       ## XNEW
                         as.integer(deriv),        ## DERIV
                         CB = as.double(H[i, ]),   ## Cardinal Basis
-                        Work = as.double(Work),   ## Added to avoid allocations
-                        PACKAGE = "smint")
+                        Work = as.double(Work))   ## Added to avoid allocations
         H[i, ] <- res$CB
     }
     
@@ -203,8 +202,7 @@ cardinalBasis_natSpline <- function(x, xout, deriv = 0) {
                         as.integer(deriv),         ## DERIV
                         CB = as.double(H[i, ]),    ## Cardinal Basis
                         Work = as.double(Work),    ## to avoid allocations
-                        B = as.double(B),          ## idem
-                        PACKAGE = "smint")
+                        B = as.double(B))          ## idem
         H[i, ] <- res$CB
 
     }

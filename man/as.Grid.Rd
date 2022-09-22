@@ -2,9 +2,24 @@
 % Please edit documentation in R/GridData.R
 \name{as.Grid}
 \alias{as.Grid}
+\alias{as.Grid.default}
+\alias{as.Grid.matrix}
+\alias{as.Grid.numeric}
+\alias{as.Grid.data.frame}
+\alias{as.Grid.list}
 \title{Coercion to \code{Grid}}
 \usage{
 as.Grid(object, ...)
+
+\method{as.Grid}{default}(object, ...)
+
+\method{as.Grid}{matrix}(object, ...)
+
+\method{as.Grid}{numeric}(object, ...)
+
+\method{as.Grid}{data.frame}(object, ...)
+
+\method{as.Grid}{list}(object, ...)
 }
 \arguments{
 \item{object}{An object to be coerced into a \code{Grid} object.}

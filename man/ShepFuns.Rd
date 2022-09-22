@@ -7,9 +7,17 @@
 \alias{ShepFun4}
 \alias{ShepFun5}
 \alias{ShepFuns}
-\title{Test functions for/from SHEPPACK}
+\title{Test function ShepFun1 from SHEPPACK}
 \usage{
 ShepFun1(x)
+
+ShepFun2(x)
+
+ShepFun3(x)
+
+ShepFun4(x)
+
+ShepFun5(x)
 }
 \arguments{
 \item{x}{A numeric vector with arbitrary length.}

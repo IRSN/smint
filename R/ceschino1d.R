@@ -115,8 +115,7 @@ interp_ceschino <- function(x, y = NULL, xout, deriv = 0) {
                         as.double(xout[i]),       ## XNEW
                         as.integer(deriv),        ## DERIV
                         CB = as.double(H[i, ]),   ## Cardinal Basis
-                        Work = as.double(Work),   ## Added to avoid allocations
-                        PACKAGE = "smint")
+                        Work = as.double(Work))   ## Added to avoid allocations
         H[i, ] <- res$CB
     }
     

@@ -201,8 +201,7 @@ qsheppInt <- function(X, y, XNew = NULL,
                     LCELL = as.integer(LCELL),
                     LNEXT = as.integer(LNEXT),
                     WS = as.double(WS),
-                    IW = as.double(IW),
-                    PACKAGE = "smint")
+                    IW = as.double(IW))
        
     ## back to matrix 'X' 
     res$X <- X
@@ -306,8 +305,7 @@ qsheppInt2d <- function(X, y, XNew = NULL,
                     rMax = as.double(1.0),    ## RMAX
                     RSQ = as.double(RSQ),
                     A = as.double(A),
-                    IER = as.integer(0L),      ## IER
-                    PACKAGE = "smint")
+                    IER = as.integer(0L))      ## IER
 
     res$yNew <- matrix(res$yNew, nrow = nNew, ncol = nc)
     colnames(res$yNew) <- cNm
@@ -411,8 +409,7 @@ qsheppInt3d <- function(X, y, XNew = NULL,
                     rMax = as.double(1.0),          ## RMAX
                     RSQ = as.double(RSQ),           ## RSQ
                     A = as.double(A),               ## A
-                    IER = as.integer(0L),           ## IER
-                    PACKAGE = "smint")
+                    IER = as.integer(0L))           ## IER
 
     res$yNew <- matrix(res$yNew, nrow = nNew, ncol = nc)
     colnames(res$yNew) <- cNm

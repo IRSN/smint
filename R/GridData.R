@@ -16,6 +16,7 @@
 #'
 #' @name Grid-class
 #' @rdname Grid-class
+#' 
 #' @export
 setClass("Grid",    	
          representation(
@@ -90,7 +91,6 @@ Grid <- function(levels,
                      nlevels = NULL,
                      dimNames = NULL,
                      index = NULL) {
-  
   
   if (missing(levels)) {
     if ( (length(nlevels) == 1) && (!is.null(dimNames)) ) {
@@ -498,7 +498,7 @@ as.Grid <- function(object, ...) {
 #' @method as.Grid default
 #' @param object An object to be coerced into a \code{Grid} object.
 #' @param ... Not used yet.
-#' @return Object with S4 class \code{"Grid"}.
+#' @rdname as.Grid
 #' @export
 as.Grid.default <- function(object, ...) {
   as.Grid(as.data.frame(object), ...)
@@ -508,7 +508,7 @@ as.Grid.default <- function(object, ...) {
 #' @method as.Grid matrix
 #' @param object An object to be coerced into a \code{Grid} object.
 #' @param ... Not used yet.
-#' @return Object with S4 class \code{"Grid"}.
+#' @rdname as.Grid
 #' @export
 as.Grid.matrix <- function(object, ...) {
   as.Grid(as.data.frame(object), ...)
@@ -518,7 +518,7 @@ as.Grid.matrix <- function(object, ...) {
 #' @method as.Grid numeric
 #' @param object An object to be coerced into a \code{Grid} object.
 #' @param ... Not used yet.
-#' @return Object with S4 class \code{"Grid"}.
+#' @rdname as.Grid
 #' @export
 as.Grid.numeric <- function(object, ...) {
   as.Grid(as.data.frame(object), ...)
@@ -528,7 +528,7 @@ as.Grid.numeric <- function(object, ...) {
 #' @method as.Grid data.frame
 #' @param object An object to be coerced into a \code{Grid} object.
 #' @param ... Not used yet.
-#' @return Object with S4 class \code{"Grid"}.
+#' @rdname as.Grid
 #' @export
 as.Grid.data.frame <- function(object, ...) {
    
@@ -558,7 +558,7 @@ as.Grid.data.frame <- function(object, ...) {
 #' @method as.Grid list
 #' @param object An object to be coerced into a \code{Grid} object.
 #' @param ... Not used yet.
-#' @return Object with S4 class \code{"Grid"}.
+#' @rdname as.Grid
 #' @export
 as.Grid.list <- function(object, ...) {
   dim <- length(object)
@@ -694,6 +694,7 @@ if (!isGeneric("sampleIn")) {
 #' @param ... optional args passed to 'sample()'
 #' @method sampleIn matrix
 #' @exportMethod sampleIn
+#' @rdname sampleIn
 #' @importFrom stats runif
 setMethod("sampleIn", 
           signature = signature(X = "matrix"),
@@ -720,6 +721,7 @@ setMethod("sampleIn",
 #' @param atSample should new sample points obtained using \code{sample}
 #' @param ... optional args passed to 'sample()'
 #' @method sampleIn data.frame
+#' @rdname sampleIn
 #' @exportMethod sampleIn
 #' @importFrom stats runif
 setMethod("sampleIn", 
@@ -735,6 +737,7 @@ setMethod("sampleIn",
 #' @param atSample should new sample points obtained using \code{sample}
 #' @param ... optional args passed to 'sample()'
 #' @method sampleIn Grid
+#' @rdname sampleIn
 #' @exportMethod sampleIn
 #' @importFrom stats runif
 setMethod("sampleIn", 
