@@ -45,11 +45,13 @@ Authors@R:
 Maintainer: Yann Richet <yann.richet@irsn.fr>
 Description: Smooth multivariate interpolation for gridded and scattered data
     with possibly large datasets. The code for scattered data is taken from the
-    'SHEPPACK' Fortran package described by W.I. Thacker, J. Zhang, L.T. Watson, 
-    J.B. Birch, M.A. Iyer and M.W. Berry (2010) <doi:10.1145/1824801.1824812>. 
-    The code of the Ceschino interpolation method comes from A. Hebert (2013) 
-    <doi:10.5772/23252>.
-License: GPL-3
+    'SHEPPACK' Fortran package by W.I. Thacker, J. Zhang, L.T. Watson, 
+    J.B. Birch, M.A. Iyer and M.W. Berry (2010) <doi:10.1145/1824801.1824812>, 
+    which is distributed under non-commercial use under ACM
+    (see <https://github.com/vtopt/sheppack> for commercial enquiries). 
+    The code of the Ceschino interpolation method coming from A. Hebert (2013) 
+    <doi:10.5772/23252>, is licensed under LGPL (version>=2.1).
+License: LICENSE File
 Imports: Matrix, methods
 Suggests: rgl, lattice
 Encoding: UTF-8
